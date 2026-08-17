@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erişilebilir Destek — Sistem Mimarisi</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --ink: #1a1f2b;
+    --muted: #5b6472;
+    --line: #e2e6ec;
+    --accent: #2f5fe0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    padding: 32px 20px 64px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+  header { margin-bottom: 8px; }
+  h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 15px; margin: 0 0 24px; }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 16px;
+    box-shadow: 0 1px 3px rgba(20,30,50,.04);
+    overflow-x: auto;
+  }
+  .mermaid { display: flex; justify-content: center; }
+  .flow {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .flow .box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .flow .box h3 {
+    margin: 0 0 6px; font-size: 14px; color: var(--accent);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .flow .box p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  .flow .box .num {
+    background: var(--accent); color: #fff; width: 22px; height: 22px;
+    border-radius: 50%; display: inline-flex; align-items: center;
+    justify-content: center; font-size: 12px; font-weight: 700; flex: 0 0 auto;
+  }
+  .note {
+    margin-top: 20px; font-size: 13px; color: var(--muted);
+    border-top: 1px dashed var(--line); padding-top: 14px;
+  }
+  h2 { font-size: 17px; margin: 28px 0 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Erişilebilir Destek — Sistem Mimarisi</h1>
+    <p class="sub">Backend ve entegrasyon şeması · Yapay zeka tabanlı erişilebilirlik platformu</p>
+  </header>
+
+  <div class="panel">
+    <pre class="mermaid">
+flowchart TB
+    subgraph client["👤 KULLANICI KATMANI"]
+        UI["Erişilebilir Web Arayüzü<br/><small>Ekran okuyucu uyumlu · klavye navigasyonu<br/>yüksek kontrast · ölçeklenebilir yazı</small>"]
+    end
+
+    subgraph backend["⚙️ BACKEND KATMANI — FastAPI"]
+        GW["API Gateway<br/><small>REST uç noktaları</small>"]
+        AUTH["Kimlik Doğrulama<br/><small>JWT / oturum yönetimi</small>"]
+        ORCH["Orkestrasyon Servisi<br/><small>istek yönlendirme · modül çağrısı<br/>sonuçların birleştirilmesi</small>"]
+    end
+
+    subgraph ai["🧠 YAPAY ZEKA MODÜLLERİ"]
+        M1["1 · Görsel Açıklama<br/><small>nesne/ortam analizi<br/>→ Türkçe alt metin</small>"]
+        M2["2 · Otomatik Altyazı<br/><small>konuşma→metin · zaman kodu<br/>→ Türkçe altyazı</small>"]
+        M3["3 · Sadeleştirme (NLP)<br/><small>özetleme · sade Türkçe<br/>→ seslendirmeye hazırlama</small>"]
+        M4["4 · Erişilebilirlik Kontrolü<br/><small>kontrast · yazı boyutu · renk körlüğü<br/>→ okunabilirlik puanı</small>"]
+    end
+
+    subgraph models["🔌 MODEL / SERVİS KATMANI"]
+        VIS["Görüntü Tanıma<br/><small>vision / captioning modeli</small>"]
+        STT["Konuşma Tanıma<br/><small>STT</small>"]
+        LLM["Dil Modeli<br/><small>özet / sadeleştirme</small>"]
+        TTS["Metin-Sesi<br/><small>TTS</small>"]
+    end
+
+    subgraph data["💾 VERİ KATMANI"]
+        DB[("PostgreSQL<br/><small>kullanıcı · içerik · sonuç kayıtları</small>")]
+        STORE[("Dosya / Nesne Depolama<br/><small>görsel · video · ses</small>")]
+    end
+
+    UI -->|"HTTPS · REST"| GW
+    GW --> AUTH
+    GW --> ORCH
+    ORCH --> M1
+    ORCH --> M2
+    ORCH --> M3
+    ORCH --> M4
+    M1 --> VIS
+    M2 --> STT
+    M3 --> LLM
+    M3 --> TTS
+    M4 --> LLM
+    M1 -.->|"medya oku/yaz"| STORE
+    M2 -.->|"medya oku/yaz"| STORE
+    ORCH -->|"kayıt/okuma"| DB
+    ORCH -->|"sonuç · JSON"| GW
+    GW -->|"erişilebilir çıktı"| UI
+
+    classDef layer fill:#eef2fd,stroke:#c7d3f7,color:#1a1f2b;
+    classDef mod fill:#fff,stroke:#2f5fe0,color:#1a1f2b,stroke-width:1.5px;
+    class UI,GW,AUTH,ORCH,VIS,STT,LLM,TTS layer;
+    class M1,M2,M3,M4 mod;
+    </pre>
+  </div>
+
+  <h2>Veri akışı — kısa açıklama</h2>
+  <div class="flow">
+    <div class="box">
+      <h3><span class="num">1</span> İstek</h3>
+      <p>Kullanıcı, erişilebilir arayüzden bir görsel, video veya metin gönderir. İstek HTTPS üzerinden backend'in API Gateway'ine ulaşır.</p>
+    </div>
+    <div class="box">
+      <h3><span class="num">2</span> Doğrulama &amp; yönlendirme</h3>
+      <p>Kimlik doğrulama (JWT) geçilir; Orkestrasyon Servisi isteğin türüne göre onu ilgili yapay zeka modülüne yönlendirir.</p>
+    </div>
+    <div class="box">
+      <h3><span class="num">3</span> İşleme</h3>
+      <p>İlgili modül, altındaki modeli (görüntü tanıma, STT, dil modeli, TTS) çağırarak Türkçe çıktıyı üretir; medya dosyaları depolamadan okunur/yazılır.</p>
+    </div>
+    <div class="box">
+      <h3><span class="num">4</span> Birleştirme &amp; kayıt</h3>
+      <p>Orkestrasyon, modül çıktısını toparlar, sonucu PostgreSQL'e kaydeder ve JSON olarak Gateway'e döndürür.</p>
+    </div>
+    <div class="box">
+      <h3><span class="num">5</span> Erişilebilir çıktı</h3>
+      <p>Gateway sonucu arayüze iletir; kullanıcı alt metni, altyazıyı, sade metni veya erişilebilirlik puanını erişilebilir biçimde görür.</p>
+    </div>
+  </div>
+
+  <p class="note">
+    <strong>Teknoloji notu:</strong> Backend FastAPI (Python), veritabanı PostgreSQL. Yapay zeka modülleri
+    backend'den bağımsız servisler olarak konumlanır; ortak bir API sözleşmesiyle (girdi/çıktı formatı)
+    Orkestrasyon Servisine bağlanır — böylece her modül ayrı geliştirilip tek sistemde birleşir.
+    Bu şema başlangıç mimarisidir; teknoloji seçimleri PoC aşamasında (20 Ağustos) netleşecektir.
+  </p>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: "base",
+    themeVariables: {
+      fontFamily: "-apple-system, Segoe UI, Roboto, sans-serif",
+      fontSize: "13px",
+      primaryColor: "#eef2fd",
+      primaryBorderColor: "#c7d3f7",
+      primaryTextColor: "#1a1f2b",
+      lineColor: "#8a97ad",
+      clusterBkg: "#f7f8fa",
+      clusterBorder: "#dbe1ea"
+    },
+    flowchart: { curve: "basis", nodeSpacing: 40, rankSpacing: 55, padding: 12 }
+  });
+</script>
+</body>
+</html>
