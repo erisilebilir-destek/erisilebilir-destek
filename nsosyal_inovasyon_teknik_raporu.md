@@ -126,6 +126,9 @@ Proje kod tabanının versiyon yönetimi ve ekip içi iş birliği süreçleri a
 
 * **Resmi Git Deposu (Repository):** [erisilebilir-destek/erisilebilir-destek](https://github.com/erisilebilir-destek/erisilebilir-destek)
 * **Temel Git Akış Kuralı:** Geliştirilen tüm yapay zeka modülleri ve iskelet tasarımlar yerel olarak test edilip doğrulandıktan sonra uzak depoya push edilmektedir. Değişiklik geçmişi depoda kayıt altındadır.
+
+![FastAPI Swagger API Dokümantasyonu Arayüzü](file:///c:/Users/zeyne/OneDrive/Masaüstü/my-agy-projects/api_docs_screenshot.png)
+
 **3.2. Model ve Veri Doğrulama**
 
 Projemizde yer alan yapay zekâ ve veri analitiği süreçleri, yüksek doğruluk ve erişilebilirlik standartlarını sağlamak amacıyla iki ana modülde (Otomatik Altyazı ve Görsel Açıklama) yapılandırılmıştır.
