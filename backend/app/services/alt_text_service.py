@@ -28,25 +28,31 @@ def _mock_alt_text() -> str:
 
 def gorsel_aciklama_uret(icerik: bytes, mime_tur: str) -> str:
     """
-    Görsel baytlarını alır, Gemini 1.5 Flash ile Türkçe alt-text üretir.
+    Görsel baytlarını alır, Gemini 3.6 Flash ile Türkçe alt-text üretir.
     Anahtar yoksa örnek metne düşer.
     """
     if not settings.GEMINI_API_KEY:
         return _mock_alt_text()
 
     try:
-        import google.generativeai as genai
+        import io
+        from PIL import Image
+        from google import genai
 
-        genai.configure(api_key=settings.GEMINI_API_KEY)
-        model = genai.GenerativeModel(settings.GEMINI_MODEL)
-        yanit = model.generate_content(
-            [
-                W3C_PROMPT,
-                {"mime_type": mime_tur, "data": icerik},
-            ]
+        # Yeni SDK Client başlatımı
+        client = genai.Client(api_key=settings.GEMINI_API_KEY)
+        
+        # Baytları PIL görsel nesnesine dönüştürüyoruz
+        img = Image.open(io.BytesIO(icerik))
+        
+        # İçerik üretimi
+        response = client.models.generate_content(
+            model=settings.GEMINI_MODEL,
+            contents=[img, W3C_PROMPT]
         )
-        metin = (yanit.text or "").strip()
+        metin = (response.text or "").strip()
         return metin or _mock_alt_text()
-    except Exception:
+    except Exception as e:
+        print(f"[HATA - ALT-TEXT SERVİSİ] Gemini API çağrısı sırasında hata oluştu: {str(e)}")
         # Ağ/anahtar/kütüphane sorununda iskeletin çalışmaya devam etmesi için:
         return _mock_alt_text()

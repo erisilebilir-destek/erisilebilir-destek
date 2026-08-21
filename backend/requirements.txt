@@ -1,22 +1,22 @@
 # Web çatısı ve sunucu
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-python-multipart==0.0.12
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.6
+python-multipart>=0.0.12
 
 # Veri katmanı (PostgreSQL + ORM)
-SQLAlchemy==2.0.35
-psycopg2-binary==2.9.9
+SQLAlchemy>=2.0.35
+# psycopg2-binary>=2.9.9 (Lokalde SQLite kullanildigi icin devre disi, sunucu veya docker kurulumunda acilacak)
 
 # Doğrulama / ayarlar
-pydantic==2.9.2
-pydantic-settings==2.5.2
-email-validator==2.2.0
+pydantic>=2.12.5
+pydantic-settings>=2.5.2
+email-validator>=2.3.0
 
 # Kimlik doğrulama (JWT + şifre hash)
-python-jose[cryptography]==3.3.0
-passlib==1.7.4
+python-jose[cryptography]>=3.5.0
+passlib[bcrypt]>=1.7.4
 
-# Yapay zeka — görsel açıklama (Gemini 1.5 Flash)
-google-generativeai==0.8.3
+# Yapay zeka — görsel açıklama (Gemini 3.6 Flash)
+google-genai>=2.19.0
 
-python-dotenv==1.0.1
+python-dotenv>=1.0.1
