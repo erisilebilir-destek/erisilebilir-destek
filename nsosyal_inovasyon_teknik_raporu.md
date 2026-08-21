@@ -206,6 +206,18 @@ Geliştirilen backend iskeleti ve yapay zekâ entegrasyonu, resmi **TEKNOFEST 20
   - **OCR Doğruluğu:** Görseldeki tüm yazılı metinler, tarihler ve kurum logoları %100 doğrulukla okunmuş ve alternatife dahil edilmiştir.
   - **Bağlamsal Betimleme:** Antik yapı ile robotik nesnelerin ilişkisi jüri standartlarına uygun şekilde nesnel olarak cümlelere dökülmüştür.
 
+### 3.2.5. API ve Sınır Değerleri Test Senaryoları
+
+Geliştirilen backend uç noktalarının kararlılığını ve güvenliğini sağlamak amacıyla Nez'in yönetiminde hazırlanan API doğrulama ve hata işleme (boundary/sınır değer) test senaryoları aşağıdaki gibidir:
+
+| Test ID | Test Edilen Durum | Girdi (Payload) | Beklenen Durum (HTTP) | Beklenen Hata Mesajı / Yanıt |
+| :--- | :--- | :--- | :--- | :--- |
+| **TS_01** | Geçerli Dosya Analizi (Mutlu Yol) | `teknofest_test.jpg` (350 KB, Görsel) | `200 OK` | `durum: "basarili"`, `otomatik_alt_text` betimlemesi. |
+| **TS_02** | Boş Dosya Gönderimi | `bos_dosya.jpg` (0 byte) | `400 Bad Request` | `detail: "Dosya boş görünüyor. Lütfen geçerli bir dosya gönderin."` |
+| **TS_03** | Desteklenmeyen Format | `belge.pdf` (PDF dosyası) | `415 Unsupported Type`| `detail: "Desteklenmeyen dosya türü: application/pdf..."` |
+| **TS_04** | Aşırı Büyük Dosya | `buyuk_video.mp4` (> 25 MB) | `413 Entity Too Large` | `detail: "Dosya çok büyük. En fazla 25 MB kabul edilir."` |
+| **TS_05** | Misafir/Yetkisiz Giriş | Token olmadan API isteği | `200 OK` (Misafir Modu)| İstek başarıyla işlenir ancak veritabanında `user_id: null` olarak işaretlenir. |
+
 **3.3. Kullanıcı Deneyimi (UI/UX) Tasarımı**
 
 Projemizin arayüz tasarımı ve kullanıcı deneyimi (UX) süreçleri, hem içerik üreticilerinin iş akışını pürüzsüzleştirmek hem de engelli bireyler için %100 engelsiz bir erişim sağlamak amacıyla Beril'in tasarladığı **B-02 Kullanıcı Akış Şeması (User Flow)** temel alınarak kurgulanmıştır.
