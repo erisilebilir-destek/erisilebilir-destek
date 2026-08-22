@@ -22,19 +22,25 @@ Platform dört yapay zeka modülünden oluşur:
 
 Tüm modüller, erişilebilir bir kullanıcı arayüzü (ekran okuyucu uyumu, klavye navigasyonu, yüksek kontrast, ölçeklenebilir yazı) üzerinden tek bir sistemde birleştirilir.
 
+## Tasarım ve Arayüz (UI/UX)
+
+- **Figma Tasarım Dosyası:** [Figma Tasarım Şablonu](https://www.figma.com/design/aNmnXW0srUldtlIRkjBoPe/233125013432---22DH114378---Tr%E1%BA%A7n-Th%E1%BB%8B-Ng%E1%BB%8Dc-Vy--Community-?node-id=9-47&t=lXy90I1TdTgpuIB1-1)
+- **Geliştirilen Ekranlar:** Gönderi Akışı, Profil, Gönderi Paylaşımı (Erişilebilirlik Kontrolü ile birlikte).
+
 ## Sistem Mimarisi
 
-Platform katmanlı bir mimariye sahiptir: kullanıcı arayüzü → backend (FastAPI) → yapay zeka modülleri → model/servis katmanı → veri katmanı. Detaylı şema ve veri akışı için [`docs/mimari.md`](docs/mimari.md) dosyasına bakınız.
+Platform katmanlı bir mimariye sahiptir: kullanıcı arayüzü → backend (FastAPI) → yapay zeka modülleri → model/servis katmanı → veri katmanı. Detaylı şema ve veri akışı için [`mimari.md`](mimari.md) dosyasına bakınız.
 
 ## Teknolojiler
 
 - **Backend:** Python, FastAPI
-- **Veritabanı:** PostgreSQL
+- **Veritabanı:** PostgreSQL / SQLite (PoC)
 - **API:** REST (JSON)
-- **Yapay Zeka:** görüntü tanıma, konuşma tanıma (STT), dil modeli (özet/sadeleştirme), metin-sesi (TTS)
-- **Arayüz:** erişilebilir web arayüzü
+- **Yapay Zeka:** Görüntü tanıma (Gemini/VLM), Konuşma tanıma (Whisper/ASR), Dil modeli (Metin sadeleştirme), Metin-Sesi (TTS)
+- **Arayüz:** Erişilebilir Mobil Uyumlu Web Arayüzü (HTML5, CSS3, JS)
 
-> Teknoloji seçimleri PoC aşamasında netleştirilmektedir.
+> Teknoloji seçimleri PoC aşamasında netleştirilmiştir.
+
 
 ## Klasör Yapısı
 
