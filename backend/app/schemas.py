@@ -46,3 +46,28 @@ class AnalyzeResponse(BaseModel):
     modul: str                 # calisan modul adi
     sonuc: AnalysisResultOut
     not_: Optional[str] = Field(default=None, alias="not")
+
+
+# ---------- Gönderi (Post) ----------
+class PostPublishRequest(BaseModel):
+    orijinal_metin: Optional[str] = None
+    otomatik_alt_text: Optional[str] = None
+    onaylandi_mi: bool = True
+
+
+class UserMinOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    kullanici_adi: str
+
+
+class PostResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    user: Optional[UserMinOut] = None
+    dosya_yolu: Optional[str] = None
+    orijinal_metin: Optional[str] = None
+    paylasildi_mi: bool
+    olusturulma_tarihi: datetime
+    analiz: Optional[AnalysisResultOut] = None
+

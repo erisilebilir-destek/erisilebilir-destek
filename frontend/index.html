@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erişilebilir Destek - Arayüz Entegrasyonu</title>
+    <!-- FontAwesome Icons for Navigation and UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Floating Accessibility Widget -->
+        <div class="accessibility-panel" id="accessibilityPanel" role="region" aria-label="Erişilebilirlik Yardımı">
+            <button class="panel-toggle" id="panelToggle" aria-expanded="false" aria-controls="panelControls">
+                <i class="fa-solid fa-universal-access"></i> Erişilebilirlik Ayarları
+            </button>
+            <div class="panel-controls id="panelControls" hidden>
+                <div class="control-group">
+                    <label for="textSize">Yazı Boyutu:</label>
+                    <div class="btn-group">
+                        <button id="btnTextDec" aria-label="Yazıyı Küçült">A-</button>
+                        <button id="btnTextReset" aria-label="Varsayılan Boyut">A</button>
+                        <button id="btnTextInc" aria-label="Yazıyı Büyüt">A+</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="contrastToggle">Yüksek Kontrast:</label>
+                    <button id="contrastToggle" class="toggle-btn" aria-pressed="false">KAPALI</button>
+                </div>
+                <div class="control-group">
+                    <label for="screenReaderToggle">Ekran Okuyucu Simülatörü:</label>
+                    <button id="screenReaderToggle" class="toggle-btn" aria-pressed="false">KAPALI</button>
+                </div>
+                <div class="reader-voice-control" id="voiceControl" style="display:none;">
+                    <small>Seçili öğelerin açıklamasını duymak için üzerlerine tıklayın.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone Mockup Container -->
+        <div class="phone-frame">
+            <!-- Screen Header -->
+            <header class="app-header">
+                <div class="status-bar">
+                    <span class="time">17:45</span>
+                    <div class="icons">
+                        <i class="fa-solid fa-signal"></i>
+                        <i class="fa-solid fa-wifi"></i>
+                        <i class="fa-solid fa-battery-three-quarters"></i>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <span class="header-title" id="headerTitle">Erişilebilir Destek</span>
+                    <div class="header-actions">
+                        <i class="fa-solid fa-ellipsis-vertical" aria-label="Daha Fazla"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Active Screen Viewport -->
+            <main class="app-content" id="appContent">
+                
+                <!-- VIEW 1: GÖNDERİ AKIŞI (FEED) -->
+                <section id="view-feed" class="view-section active">
+                    <div class="feed-container" id="feedContainer">
+                        <!-- Dynamic posts will be rendered here -->
+                        <div class="feed-placeholder">
+                            <i class="fa-solid fa-circle-notch fa-spin"></i>
+                            <p>Gönderiler yükleniyor...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 2: YENİ GÖNDERİ PAYLAŞ (SHARE POST) -->
+                <section id="view-share" class="view-section">
+                    <div class="share-container">
+                        <h2 class="view-title">Yeni Gönderi Paylaş</h2>
+                        <div class="post-creator-card">
+                            <div class="creator-header">
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=80" alt="Kullanıcı Profil Resmi" class="user-avatar-small">
+                                <textarea id="postDescription" placeholder="Aklında ne var?" aria-label="Gönderi metni girin"></textarea>
+                            </div>
+                            
+                            <!-- Image/Video Uploader -->
+                            <div class="media-uploader" id="mediaUploader" onclick="document.getElementById('fileInput').click()" role="button" tabindex="0" aria-label="Medya yükleyin (Görsel veya Video)">
+                                <input type="file" id="fileInput" accept="image/*,video/*" style="display:none;">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <p>Görsel veya Video Ekle</p>
+                                    <span>Dosya seçmek için tıklayın</span>
+                                </div>
+                                <div class="preview-container" id="previewContainer" style="display:none;">
+                                    <!-- img or video element will be appended here -->
+                                </div>
+                            </div>
+
+                            <!-- Accessibility Check Section -->
+                            <div class="accessibility-check-box" id="accessibilityCheckBox">
+                                <div class="box-header">
+                                    <div class="title-with-icon">
+                                        <i class="fa-solid fa-universal-access"></i>
+                                        <strong>Erişilebilirlik Bilgisi</strong>
+                                    </div>
+                                    <button type="button" class="btn-check" id="btnCheck" disabled>Kontrol Et</button>
+                                </div>
+                                
+                                <div class="check-result-placeholder" id="checkResultPlaceholder">
+                                    Medya seçtikten sonra erişilebilirlik analizi yapmak için "Kontrol Et" butonuna basın.
+                                </div>
+
+                                <div class="check-results" id="checkResults" style="display:none;">
+                                    <div class="scores-row">
+                                        <div class="score-card main-score">
+                                            <span class="score-label">Erişilebilirlik Puanı</span>
+                                            <span class="score-value" id="resGeneralScore">94</span>
+                                        </div>
+                                        <div class="score-card">
+                                            <span class="score-label">Renk Kontrastı</span>
+                                            <span class="score-value" id="resContrastScore">4.5</span>
+                                        </div>
+                                        <div class="score-card">
+                                            <span class="score-label">Okunabilirlik</span>
+                                            <span class="score-value" id="resReadabilityScore">85</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="feedback-text" id="accessibilityFeedback">
+                                        <!-- WCAG / Accessibility suggestions -->
+                                    </div>
+
+                                    <div class="alt-text-editor">
+                                        <label for="approvedAltText">Alternatif Metin Önerisi (W3C Standartlarında):</label>
+                                        <textarea id="approvedAltText" placeholder="Görsel açıklaması buraya gelecek..." aria-label="Alternatif metni düzenleyin"></textarea>
+                                        <small class="helper-text">Yapay zeka tarafından üretilen bu açıklamayı düzenleyebilir ve onaylayabilirsiniz.</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn-share" id="btnShare" disabled>Paylaş</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 3: PROFİL (PROFILE) -->
+                <section id="view-profile" class="view-section">
+                    <div class="profile-container">
+                        <!-- Profile Header Card -->
+                        <div class="profile-header-card">
+                            <div class="profile-main-info">
+                                <div class="avatar-container">
+                                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80" alt="Teknofest Profil Resmi" class="profile-avatar">
+                                </div>
+                                <div class="profile-user-details">
+                                    <div class="name-score-row">
+                                        <h3 class="profile-name">Teknofest</h3>
+                                        <div class="engelsiz-skor-badge">
+                                            <span class="label">Engelsiz Yaşam Puanı</span>
+                                            <span class="value" id="profileScore">94</span>
+                                        </div>
+                                    </div>
+                                    <span class="profile-handle">@teknofest</span>
+                                </div>
+                            </div>
+
+                            <!-- Follower and Post Stats -->
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <strong>8</strong>
+                                    <span>Takip Edilen</span>
+                                </div>
+                                <div class="stat-item">
+                                    <strong>24B</strong>
+                                    <span>Takipçi</span>
+                                </div>
+                                <div class="stat-item">
+                                    <strong id="profilePostCount">16</strong>
+                                    <span>Gönderi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Submenu -->
+                        <div class="profile-tabs">
+                            <button class="profile-tab-btn">Zaman Çizelgesi</button>
+                            <button class="profile-tab-btn active">Medya</button>
+                            <button class="profile-tab-btn">Yanıtlar</button>
+                            <button class="profile-tab-btn">Hakkında</button>
+                        </div>
+
+                        <!-- Media Grid -->
+                        <div class="media-grid" id="profileMediaGrid">
+                            <!-- Dynamic images/videos will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Screen Bottom Navigation -->
+            <footer class="app-nav">
+                <button class="nav-item active" data-view="view-feed" aria-label="Ana Sayfa Akışı">
+                    <i class="fa-solid fa-house"></i>
+                </button>
+                <button class="nav-item" aria-label="Arama">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="nav-item" data-view="view-share" aria-label="Yeni Gönderi Paylaş">
+                    <i class="fa-solid fa-plus-circle font-large"></i>
+                </button>
+                <button class="nav-item" aria-label="Mesajlar">
+                    <i class="fa-solid fa-comment-dots"></i>
+                </button>
+                <button class="nav-item" data-view="view-profile" aria-label="Profil">
+                    <i class="fa-solid fa-circle-user"></i>
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <span class="toast-message">Bildirim</span>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

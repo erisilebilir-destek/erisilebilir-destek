@@ -13,15 +13,21 @@ Katmanlar:
 Dokümantasyon:  http://127.0.0.1:8000/docs
 """
 
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from .auth.router import router as auth_router
 from .database import Base, engine
 from .routers.analyze import router as analyze_router
+from .routers.posts import router as posts_router
 
 # Tablolar yoksa oluştur (geliştirme kolaylığı; üretimde Alembic önerilir).
 Base.metadata.create_all(bind=engine)
+
+# Yükleme klasörünün varlığından emin ol
+os.makedirs("uploads", exist_ok=True)
 
 app = FastAPI(
     title="Erişilebilir Destek (NSosyal) API",
@@ -36,9 +42,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Statik Dosya Paylaşımı (yüklenen resimler/videolar/altyazılar için)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+
 # Router'lar
 app.include_router(auth_router)
 app.include_router(analyze_router)
+app.include_router(posts_router)
+
 
 
 @app.get("/", tags=["Sağlık"])
