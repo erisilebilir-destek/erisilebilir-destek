@@ -16,19 +16,23 @@ backend/
     ├── main.py               # API Gateway — FastAPI girişi, CORS, router birleştirme
     ├── config.py             # Ayarlar (.env'den okur)
     ├── database.py           # Veri katmanı — SQLAlchemy motoru/oturumu
-    ├── models.py             # ORM modelleri: Users, Contents, AnalysisResults
+    ├── models.py             # ORM modelleri: users, contents, analysis_results
     ├── schemas.py            # Pydantic şemaları
     ├── auth/                 # Kimlik Doğrulama Servisi
     │   ├── security.py       # şifre hash + JWT
     │   └── router.py         # /auth/register, /auth/login
-    ├── services/             # Orkestrasyon + Yapay Zeka Modülleri
-    │   ├── orchestration.py  # isteği türüne göre yönlendirir, sonucu birleştirir + kaydeder
-    │   ├── alt_text_service.py      # Görsel açıklama — Gemini 1.5 Flash
-    │   ├── subtitle_service.py      # Altyazı (Whisper hattına bağlanacak)
-    │   ├── simplification_service.py# Metin sadeleştirme
-    │   └── readability_service.py   # Kontrast + okunabilirlik + 0-100 puan
-    └── routers/
-        └── analyze.py        # POST /api/v1/analyze (orkestrasyon uç noktası)
+    ├── routers/              # REST uç noktaları
+    │   ├── analyze.py        # POST /api/v1/analyze (orkestrasyon uç noktası)
+    │   └── posts.py          # gönderi akışı, yayınlama, profil ve puan uç noktaları
+    └── services/             # Orkestrasyon + Yapay Zeka Modülleri
+        ├── orchestration.py           # isteği türüne göre yönlendirir, sonucu birleştirir + kaydeder
+        ├── alt_text_service.py        # Görsel açıklama — Gemini (settings.GEMINI_MODEL)
+        ├── subtitle_service.py        # Altyazı — FFmpeg + Whisper, yoksa mock WebVTT
+        ├── simplification_service.py  # Metin sadeleştirme (mock — NLP modeline bağlanacak)
+        └── readability_service.py     # Kontrast + okunabilirlik + 0-100 genel puan
+
+Çalışma sırasında oluşan `venv/`, `uploads/`, `nsosyal.db` ve `__pycache__/`
+klasörleri sürüm kontrolüne girmez; kök dizindeki `.gitignore` bunları kapsar.
 ```
 
 ## Kurulum ve çalıştırma
@@ -54,12 +58,16 @@ uvicorn app.main:app --reload
 
 ## Uç noktalar
 
-| Yöntem | Yol                 | Açıklama                                          |
-|--------|---------------------|---------------------------------------------------|
-| GET    | `/`                 | Sağlık kontrolü                                   |
-| POST   | `/auth/register`    | Kayıt (kullanıcı_adı, e-posta, şifre)             |
-| POST   | `/auth/login`       | Giriş → JWT token                                 |
-| POST   | `/api/v1/analyze`   | Dosya al → analiz et → JSON döndür (token opsiyonel) |
+| Yöntem | Yol | Açıklama |
+|--------|-----|----------|
+| GET  | `/` | Sağlık kontrolü |
+| POST | `/auth/register` | Kayıt (kullanıcı adı, e-posta, şifre) |
+| POST | `/auth/login` | Giriş → JWT token |
+| POST | `/api/v1/analyze` | Dosya al → analiz et → JSON döndür (token opsiyonel) |
+| GET  | `/api/v1/posts` | Paylaşılmış gönderi akışı |
+| POST | `/api/v1/posts/{content_id}/publish` | Analiz edilmiş içeriği gönderi olarak yayınla |
+| GET  | `/api/v1/users/{username}/posts` | Bir kullanıcının gönderileri (profil) |
+| GET  | `/api/v1/users/{username}/score` | Kullanıcının Engelsiz Yaşam Puanı |
 
 ## Postman ile test
 
@@ -87,9 +95,13 @@ bir dosya seçin. İsterseniz Authorization → Bearer Token alanına token'ı y
 `app/services/` altındaki servis fonksiyonlarının içi, ilgili modül hazır olunca
 doldurulacak:
 
-- `alt_text_service.gorsel_aciklama_uret` → Merve'nin M-04 modeli / Gemini
-- `subtitle_service.altyazi_uret` → Sevda'nın Whisper + FFmpeg hattı (S-08)
-- `readability_service.*` → Beril'in 100 puanlık matrisi (B-04)
+- `alt_text_service.gorsel_aciklama_uret` → Merve'nin M-04 modeli / Gemini *(Gemini hattı bağlandı; anahtar yoksa mock)*
+- `subtitle_service.altyazi_uret` → Sevda'nın Whisper + FFmpeg hattı (S-08) *(bağlandı; araç yoksa mock)*
+- `simplification_service.sadelestir` → NLP sadeleştirme modeli *(hâlâ mock)*
+- `readability_service.*` → Beril'in 100 puanlık matrisi (B-04) *(hâlâ örnek formül)*
+
+PoC aşamasındaki bağımsız scriptler `poc/` klasöründe tarihsel kayıt olarak
+saklanmaktadır.
 
 Yanıt anahtarları sabit tutulduğu sürece arayüz ve diğer modüller etkilenmeden
 gerçek modele geçilebilir.

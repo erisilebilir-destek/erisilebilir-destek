@@ -1,7 +1,7 @@
 """
 Altyazı Servisi — video → Türkçe altyazı (WebVTT).
 
-Sevda'nın STT PoC'si (nsosyal_poc_stt.py, S-02/S-03) bu servise uyarlanmıştır.
+Sevda'nın STT PoC'si (poc/poc_altyazi_stt.py, S-02/S-03) bu servise uyarlanmıştır.
 Akış: video baytları → geçici dosya → FFmpeg ile 16 kHz mono ses → Whisper (Türkçe)
 → zaman kodlu WebVTT.
 

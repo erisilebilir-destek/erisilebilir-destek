@@ -21,7 +21,7 @@ class Settings(BaseSettings):
 
     # Google Gemini (görsel açıklama). Boşsa sistem örnek/mock yanıta düşer.
     GEMINI_API_KEY: str = ""
-    GEMINI_MODEL: str = "gemini-1.5-flash"
+    GEMINI_MODEL: str = "gemini-3.6-flash"
 
     # Whisper (otomatik altyazı) model boyutu: tiny | base | small | medium | large
     WHISPER_MODEL: str = "base"

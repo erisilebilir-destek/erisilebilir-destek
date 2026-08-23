@@ -164,7 +164,7 @@ def run_stt_pipeline(video_path: str, model_size: str = "base"):
 if __name__ == "__main__":
     # Konsoldan çalıştırılırken video dosyasının verilip verilmediğini kontrol ediyoruz
     if len(sys.argv) < 2:
-        print("Kullanım: python nsosyal_poc_stt.py <video_dosyasi_yolu> [model_boyutu]")
+        print("Kullanım: python poc_altyazi_stt.py <video_dosyasi_yolu> [model_boyutu]")
         sys.exit(1)
         
     # Girdi video dosyasının yolunu argümandan alıyoruz

@@ -1,29 +1,34 @@
-# Web çatısı ve sunucu
+# ─── Web çatısı ve sunucu ───────────────────────────────────────────────
 fastapi==0.115.0
 uvicorn[standard]==0.30.6
 python-multipart==0.0.12
 
-# Veri katmanı (ORM). Yerel geliştirmede SQLite yeterlidir.
+# ─── Veri katmanı (ORM) ────────────────────────────────────────────────
+# Yerel geliştirmede SQLite yeterlidir; PostgreSQL için psycopg2 gerekir.
 SQLAlchemy==2.0.35
 
-# Doğrulama / ayarlar
+# ─── Doğrulama / ayarlar ───────────────────────────────────────────────
 pydantic==2.9.2
 pydantic-settings==2.5.2
 email-validator==2.2.0
+python-dotenv==1.0.1
 
-# Kimlik doğrulama (JWT + şifre hash)
+# ─── Kimlik doğrulama (JWT + şifre hash) ───────────────────────────────
 python-jose[cryptography]==3.3.0
 passlib==1.7.4
 
-python-dotenv==1.0.1
 
-# --- OPSİYONEL (şimdilik gerekmez) ---
-# PostgreSQL sürücüsü: yalnızca gerçek PostgreSQL'e bağlanınca gerekir.
+# ═══ OPSİYONEL — kurulmazsa sistem mock çıktıyla çalışmaya devam eder ═══
+#
+# PostgreSQL sürücüsü (yalnızca gerçek PostgreSQL'e bağlanınca gerekir):
 # psycopg2-binary==2.9.9
 #
-# Gerçek Gemini görsel açıklaması için. Boş bırakılırsa sistem mock ile çalışır.
-# google-generativeai==0.8.3
+# Gerçek Gemini görsel açıklaması için (alt_text_service.py):
+#   NOT: kod "from google import genai" kullanır -> paket adı google-genai'dir,
+#   eski "google-generativeai" paketi DEĞİL.
+# google-genai==1.0.0
+# pillow==10.4.0
 #
-# Gerçek altyazı (Sevda'nın STT hattı) için. Kurulu değilse mock altyazı döner.
-# Ayrıca sistemde FFmpeg gerekir (Mac: brew install ffmpeg).
+# Gerçek altyazı için (subtitle_service.py). Ayrıca sistemde FFmpeg gerekir
+# (macOS: brew install ffmpeg):
 # openai-whisper==20231117

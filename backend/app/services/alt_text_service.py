@@ -1,5 +1,5 @@
 """
-Görsel Açıklama Servisi (Alt-Text) — Google Gemini 1.5 Flash entegrasyonu.
+Görsel Açıklama Servisi (Alt-Text) — Google Gemini entegrasyonu.
 
 Bir görsel alır ve W3C erişilebilirlik ilkelerine uygun Türkçe alternatif metin
 üretir. GEMINI_API_KEY tanımlı değilse ya da kütüphane yoksa, sistem çökmemesi
@@ -28,7 +28,7 @@ def _mock_alt_text() -> str:
 
 def gorsel_aciklama_uret(icerik: bytes, mime_tur: str) -> str:
     """
-    Görsel baytlarını alır, Gemini 3.6 Flash ile Türkçe alt-text üretir.
+    Görsel baytlarını alır, settings.GEMINI_MODEL ile Türkçe alt-text üretir.
     Anahtar yoksa örnek metne düşer.
     """
     if not settings.GEMINI_API_KEY:

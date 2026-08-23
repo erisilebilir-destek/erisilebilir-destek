@@ -6,7 +6,6 @@ let CURRENT_USER = 'teknofest';
 // Uygulama Durumu (State)
 let selectedFile = null;
 let currentContentId = null;
-let currentScore = 94;
 
 // Ekran Okuyucu Durumu
 let screenReaderEnabled = false;
@@ -567,7 +566,6 @@ async function loadProfile() {
         if (scoreRes.ok) {
             const scoreData = await scoreRes.json();
             profileScore.textContent = scoreData.score;
-            currentScore = scoreData.score;
         }
 
         // 2. Profil Gönderilerini Al
