@@ -63,10 +63,10 @@ git clone https://github.com/erisilebilir-destek/erisilebilir-destek.git
 cd erisilebilir-destek/backend
 
 python -m venv venv
-source venv/bin/activate            # Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
 
-cp .env.example .env                # sonra .env'i kendi anahtarlarınızla doldurun
+cp .env.example .env
 uvicorn app.main:app --reload
 ```
 
@@ -110,26 +110,24 @@ için [`docs/mimari.md`](docs/mimari.md) dosyasına bakınız
 
 ## Dokümanlar
 
-| Doküman | İçerik |
-|---------|--------|
-| [`docs/mimari.md`](docs/mimari.md) | Katmanlı mimari şeması ve veri akışı |
-| [`docs/proje-tanitim-raporu.md`](docs/proje-tanitim-raporu.md) | Problem tanımı, amaç, kapsam — proje tanıtım raporu |
-| [`docs/inovasyon-teknik-raporu.md`](docs/inovasyon-teknik-raporu.md) | İnovasyon ve teknik rapor |
-| [`docs/model-karsilastirma-notu.md`](docs/model-karsilastirma-notu.md) | VLM model karşılaştırması ve seçim gerekçesi |
-| `docs/entegrasyon-dokumani.docx` | Modüllerin backend'e entegrasyon planı |
-| `docs/teknik-kontrol-notu.docx` | Teknik kontrol / test notları |
-| `docs/arsiv/` | Yerini yeni sürümlere bırakmış eski taslaklar |
+| Doküman                                                                | İçerik                                              |
+| ---------------------------------------------------------------------- | --------------------------------------------------- |
+| [`docs/mimari.md`](docs/mimari.md)                                     | Katmanlı mimari şeması ve veri akışı                |
+| [`docs/proje-tanitim-raporu.md`](docs/proje-tanitim-raporu.md)         | Problem tanımı, amaç, kapsam — proje tanıtım raporu |
+| [`docs/inovasyon-teknik-raporu.md`](docs/inovasyon-teknik-raporu.md)   | İnovasyon ve teknik rapor                           |
+| [`docs/model-karsilastirma-notu.md`](docs/model-karsilastirma-notu.md) | VLM model karşılaştırması ve seçim gerekçesi        |
+| `docs/entegrasyon-dokumani.docx`                                       | Modüllerin backend'e entegrasyon planı              |
+| `docs/teknik-kontrol-notu.docx`                                        | Teknik kontrol / test notları                       |
+| `docs/arsiv/`                                                          | Yerini yeni sürümlere bırakmış eski taslaklar       |
 
 ## Ekip
 
-| Üye | Rol |
-|-----|-----|
-| Merve | Takım kaptanı ve yapay zeka |
-| Zeynep Ecren | Yazılım, backend ve sistem entegrasyonu |
-| Nez | Backend desteği, kalite güvence ve test |
-| Beril | Erişilebilirlik analizi, UI/UX ve puanlama |
-| Sevda | Video, ses ve otomatik altyazı modülü |
+| Üye          | Rol                                        |
+| ------------ | ------------------------------------------ |
+| Merve        | Takım kaptanı ve yapay zeka                |
+| Zeynep Ecren | Yazılım, backend ve sistem entegrasyonu    |
+| Nez          | Backend desteği, kalite güvence ve test    |
+| Beril        | Erişilebilirlik analizi, UI/UX ve puanlama |
+| Sevda        | Video, ses ve otomatik altyazı modülü      |
 
 ---
-
-*Bu proje bir ekip çalışması kapsamında geliştirilmektedir.*

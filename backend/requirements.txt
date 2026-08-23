@@ -17,6 +17,11 @@ python-dotenv==1.0.1
 python-jose[cryptography]==3.3.0
 passlib==1.7.4
 
+# ─── Testler (pytest -q) ───────────────────────────────────────────────
+# httpx, FastAPI'nin TestClient'ı için gereklidir.
+pytest==9.1.1
+httpx==0.28.1
+
 
 # ═══ OPSİYONEL — kurulmazsa sistem mock çıktıyla çalışmaya devam eder ═══
 #

@@ -1,12 +1,8 @@
 """
 Altyazı Servisi — video → Türkçe altyazı (WebVTT).
+Akış: video baytları → geçici dosya → FFmpeg ile 16 kHz mono ses → Whisper (Türkçe)→ zaman kodlu WebVTT.
 
-Sevda'nın STT PoC'si (poc/poc_altyazi_stt.py, S-02/S-03) bu servise uyarlanmıştır.
-Akış: video baytları → geçici dosya → FFmpeg ile 16 kHz mono ses → Whisper (Türkçe)
-→ zaman kodlu WebVTT.
-
-Sağlamlık: FFmpeg veya openai-whisper kurulu değilse sistem çökmez, örnek (mock)
-altyazıya düşer. Böylece backend her koşulda çalışır.
+Sağlamlık: FFmpeg veya openai-whisper kurulu değilse sistem çökmez, örnek altyazıya düşer. Böylece backend her koşulda çalışır.
 
 Gerçek altyazı için kurulum:
     brew install ffmpeg
@@ -65,18 +61,16 @@ def _vtt_yaz(segmentler: list, cikti_yolu: str) -> None:
             f.write(f"{i}\n{bas} --> {son}\n{seg['text'].strip()}\n\n")
 
 
-def altyazi_uret(icerik: bytes, dosya_adi: str) -> str:
+def altyazi_uret(video_yolu: str) -> str:
     """
-    Video baytlarını alır, Türkçe altyazı (WebVTT) üretir ve dosya yolunu döndürür.
-    FFmpeg/Whisper yoksa örnek altyazıya düşer.
-    """
-    os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
-    ad = os.path.splitext(dosya_adi)[0] or "video"
-    video_yolu = os.path.join(settings.UPLOAD_DIR, dosya_adi or "video.mp4")
-    vtt_yolu = os.path.join(settings.UPLOAD_DIR, f"{ad}.vtt")
+    Kaydedilmiş bir videonun yolunu alır, Türkçe altyazı (WebVTT) üretir ve
+    .vtt dosyasının yolunu döndürür. FFmpeg/Whisper yoksa örnek altyazıya düşer.
 
-    with open(video_yolu, "wb") as f:
-        f.write(icerik)
+    Video dosyası çağrıdan önce diske yazılmış olmalıdır;
+    böylece büyük dosyalar ikinci kez yazılmaz.
+    """
+    kok = os.path.splitext(video_yolu)[0]
+    vtt_yolu = f"{kok}.vtt"
 
     # Whisper kurulu mu?
     try:
@@ -91,12 +85,16 @@ def altyazi_uret(icerik: bytes, dosya_adi: str) -> str:
         return vtt_yolu
 
     # Gerçek akış: ses ayıkla → Whisper ile Türkçe deşifre → WebVTT yaz
-    wav_yolu = os.path.join(settings.UPLOAD_DIR, f"{ad}_temp.wav")
+    wav_yolu = f"{kok}_temp.wav"
     try:
         _sesi_ayikla(video_yolu, wav_yolu)
         model = whisper.load_model(settings.WHISPER_MODEL)
         sonuc = model.transcribe(wav_yolu, language="tr")
-        _vtt_yaz(sonuc["segments"], vtt_yolu)
+        segmentler = sonuc.get("segments") or []
+        if not isinstance(segmentler, list) or not segmentler:
+            # Sessiz video / konuşma bulunamadı: boş .vtt yerine örnek altyazıya düş
+            raise ValueError("Whisper konuşma segmenti döndürmedi.")
+        _vtt_yaz(segmentler, vtt_yolu)
     except Exception:
         # Herhangi bir hatada sistemin çalışmaya devam etmesi için örnek altyazı
         with open(vtt_yolu, "w", encoding="utf-8") as f:

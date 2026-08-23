@@ -3,7 +3,7 @@ Görsel Açıklama Servisi (Alt-Text) — Google Gemini entegrasyonu.
 
 Bir görsel alır ve W3C erişilebilirlik ilkelerine uygun Türkçe alternatif metin
 üretir. GEMINI_API_KEY tanımlı değilse ya da kütüphane yoksa, sistem çökmemesi
-için örnek (mock) bir metne düşer — böylece iskelet her koşulda çalışır.
+için örnek bir metne düşer — böylece iskelet her koşulda çalışır.
 """
 
 from ..config import settings
@@ -36,15 +36,19 @@ def gorsel_aciklama_uret(icerik: bytes, mime_tur: str) -> str:
 
     try:
         import io
-        from PIL import Image
-        from google import genai
+
+        # Opsiyonel bağımlılıklar (google-genai, pillow). Kurulu değilse aşağıdaki
+        # except bloğu devreye girer; type: ignore, kurulu olmadığında çıkan
+        # "içeri aktarma çözümlenemedi" uyarısını susturur.
+        from PIL import Image  # type: ignore[import-not-found]
+        from google import genai  # type: ignore[attr-defined]
 
         # Yeni SDK Client başlatımı
         client = genai.Client(api_key=settings.GEMINI_API_KEY)
-        
+
         # Baytları PIL görsel nesnesine dönüştürüyoruz
         img = Image.open(io.BytesIO(icerik))
-        
+
         # İçerik üretimi
         response = client.models.generate_content(
             model=settings.GEMINI_MODEL,

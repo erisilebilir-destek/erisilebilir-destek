@@ -6,6 +6,7 @@ kaydeder. /api/v1/analyze bu servisi kullanır.
 
 import os
 from typing import Optional
+from uuid import uuid4
 
 from sqlalchemy.orm import Session
 
@@ -42,9 +43,21 @@ def _tur_belirle(mime: str, dosya_adi: str) -> Optional[str]:
     return None
 
 
+def _guvenli_ad(dosya_adi: str) -> str:
+    """
+    Yükleme klasörüne yazılacak güvenli ve benzersiz bir dosya adı üretir.
+
+    - Dizin bileşenleri atılır: "../../gizli.py" gibi adlar uploads/ dışına çıkamaz.
+    - Başına rastgele ön ek eklenir: aynı adla yüklenen iki dosya birbirini ezmez.
+    """
+    ham = (dosya_adi or "").replace("\\", "/")          # Windows istemcilerinin yolu
+    temiz = os.path.basename(ham).strip().lstrip(".") or "dosya"
+    return f"{uuid4().hex[:8]}_{temiz}"
+
+
 def _dosya_kaydet(icerik: bytes, dosya_adi: str) -> str:
     os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
-    yol = os.path.join(settings.UPLOAD_DIR, dosya_adi)
+    yol = os.path.join(settings.UPLOAD_DIR, _guvenli_ad(dosya_adi))
     with open(yol, "wb") as f:
         f.write(icerik)
     return yol
@@ -84,7 +97,7 @@ def analiz_et(
     elif tur == "video":
         modul = "otomatik_altyazi"
         dosya_yolu = _dosya_kaydet(icerik, dosya_adi)
-        altyazi_yolu = subtitle_service.altyazi_uret(icerik, dosya_adi)
+        altyazi_yolu = subtitle_service.altyazi_uret(dosya_yolu)
 
     else:  # metin
         modul = "sadelestirme"
