@@ -242,15 +242,16 @@ flowchart TD
     classDef proc fill:#0f172a,stroke:#a78bfa,stroke-width:1.5px,color:#f8fafc,rx:8px,ry:8px;
     classDef model fill:#0f172a,stroke:#34d399,stroke-width:1.5px,color:#f8fafc,rx:6px,ry:6px;
 
-    Video["📹 Kullanıcı Videosu"]:::file
-    FFmpeg1["⚙️ 1. Adım: Sesi Ayırma (FFmpeg)"]:::proc
-    Wav["🔊 Temiz Ses Dosyası (.wav)"]:::file
-    Whisper["🧠 2. Adım: Sesten Metne (Whisper Large/Turbo)"]:::model
-    RawText["📝 Ham Metin & Zaman Kodları"]:::file
-    PostProc["⚙️ 3. Adım: İmla, Formatlama & WebVTT Dönüşümü<br/>(Türkçe NLP / Post-Processing)"]:::proc
-    Vtt["📄 Erişilebilir WebVTT / SRT Dosyası"]:::file
-    FFmpeg2["⚙️ 4. Adım: Altyazıyı Videoya Basma (FFmpeg)"]:::proc
-    Output["🎬 Altyazılı Erişilebilir Video"]:::file
+    Video["Kullanıcı Videosu"]:::file
+    FFmpeg1["1. Adım: Sesi Ayırma (FFmpeg)"]:::proc
+    Wav["Temiz Ses Dosyası (.wav)"]:::file
+    Whisper["2. Adım: Sesten Metne (Whisper Large/Turbo)"]:::model
+    RawText["Ham Metin & Zaman Kodları"]:::file
+    PostProc["3. Adım: İmla, Formatlama & WebVTT Dönüşümü<br/>(Türkçe NLP / Post-Processing)"]:::proc
+    Vtt["Erişilebilir WebVTT / SRT Dosyası"]:::file
+    FFmpeg2["4. Adım: Altyazıyı Videoya Basma (FFmpeg)"]:::proc
+    Output["Altyazılı Erişilebilir Video"]:::file
+
 
     Video --> FFmpeg1
     FFmpeg1 --> Wav
