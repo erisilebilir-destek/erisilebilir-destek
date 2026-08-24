@@ -19,25 +19,28 @@
 # PROJE ÖZETİ
 
 **1.1. Proje Konusu ve Amacı**
-NSosyal Erişilebilir Destek; sosyal medya ekosisteminde üretilen görsel, video ve metin tabanlı içeriklerin paylaşım öncesinde (pre-publishing) analiz edilerek görme, işitme, okuma ve anlama güçlüğü (disleksi, bilişsel veya öğrenme güçlüğü, düşük dijital okuryazarlık) yaşayan kullanıcılar için erişilebilir hale getirilmesini sağlayan Yapay Zeka destekli bir içerik üretim asistanıdır. 
+NSosyal Erişilebilir Destek; sosyal medya ekosisteminde üretilen görsel, video ve metin tabanlı içeriklerin paylaşım öncesinde analiz edilerek görme, işitme, okuma ve anlama güçlüğü yaşayan kullanıcılar için erişilebilir hale getirilmesini sağlayan Yapay Zeka destekli bir içerik üretim asistanıdır. 
 
-Projenin odaklandığı temel problem, sosyal medya içeriklerinin ezici çoğunluğunun erişilebilirlik standartlarından yoksun olması ve mevcut altyazı/alternatif metin araçlarının pratik olarak içerik üreticilerinin iş akışına entegre olmamasıdır. Projenin nihai amacı; erişilebilirliği sonradan yapılan bir düzeltme adımı olmaktan çıkarıp, içerik üreticilerinin gönderi paylaşım sürecinin doğal ve pürüzsüz bir parçası haline getirmektir. İçerik üreticilerini teknik detaylarla yormadan; tek tıkla analiz, Yapay Zeka (ASR) destekli otomatik altyazı/alternatif metin üretimi ve oyunlaştırılmış "Erişilebilirlik Skoru (0-100)" ile teşvik ederek platform genelinde engelsiz bir dijital alan oluşturulması hedeflenmektedir. 
+Projenin odaklandığı temel problem, sosyal medya içeriklerinin ezici çoğunluğunun erişilebilirlik standartlarından yoksun olması ve mevcut altyazı/alternatif metin araçlarının pratik olarak içerik üreticilerinin iş akışına entegre olmamasıdır. Projenin nihai amacı; erişilebilirliği sonradan yapılan bir düzeltme adımı olmaktan çıkarıp, içerik üreticilerinin gönderi paylaşım sürecinin doğal ve pürüzsüz bir parçası haline getirmektir. İçerik üreticilerini teknik detaylarla yormadan; tek tıkla analiz, Yapay Zeka destekli otomatik altyazı/alternatif metin üretimi ve oyunlaştırılmış "Erişilebilirlik Skoru" ile teşvik ederek platform genelinde engelsiz bir dijital alan oluşturulması hedeflenmektedir. 
 
-Projemizin birincil odağı ve katıldığı ana dikey **Sosyal Yapay Zeka** temasıdır. Geliştirilen görsel açıklama (VLM) ve otomatik altyazı (ASR) gibi Yapay Zeka servisleri projenin özünü oluştururken; engelsiz tasarım modelleri, gerçek zamanlı yönlendirme ekranları ve puanlama sistemi ise bu Yapay Zeka servislerinin kullanıcıya ulaştırılmasını sağlayan destekleyici **Kullanıcı Katılımı & Arayüz/Kullanıcı Deneyimi (UI/UX)** katmanını oluşturmaktadır.
+Projemizin birincil odağı ve katıldığı ana dikey **Sosyal Yapay Zeka** temasıdır. Geliştirilen görsel açıklama ve otomatik altyazı gibi Yapay Zeka servisleri projenin özünü oluştururken; engelsiz tasarım modelleri, gerçek zamanlı yönlendirme ekranları ve puanlama sistemi ise bu Yapay Zeka servislerinin kullanıcıya ulaştırılmasını sağlayan destekleyici **Kullanıcı Katılımı ve Arayüz** katmanını oluşturmaktadır.
+
 
 
 **1.2. Proje Kapsamı ve Yöntemi**
-Projenin sınırları (kapsamı) şu ana bileşenlerden oluşmaktadır:
-* **Görsel Alternatif Metin Modülü:** Görsellerin bağlamını, nesneleri ve eylemleri analiz ederek ekran okuyucular için Türkçe açıklama (alt-text) üretir.
-* **Otomatik Altyazı Modülü:** Videodaki konuşmaları otomatik ses tanıma (ASR - Whisper) desteğiyle Türkçe altyazıya dönüştürür. W3C standartları gereği WebVTT (.vtt) ve SRT formatlarını destekler.
-* **Metin Sadeleştirme Modülü:** Disleksi veya bilişsel engeli olan kullanıcılar için karmaşık metinleri anlam bütünlüğünü koruyarak sadeleştirir.
+Projenin kapsamı şu ana bileşenlerden oluşmaktadır:
+* **Görsel Alternatif Metin Modülü:** Görsellerin bağlamını, nesneleri ve eylemleri analiz ederek ekran okuyucular için Türkçe alternatif metin üretir.
+* **Otomatik Altyazı Modülü:** Videodaki konuşmaları otomatik ses tanıma desteğiyle Türkçe altyazıya dönüştürür. WebVTT ve SRT formatlarını destekler.
+* **Metin Sadeleştirme Modülü:** Bilişsel engeli veya okuma güçlüğü olan kullanıcılar için karmaşık metinleri anlam bütünlüğünü koruyarak sadeleştirir.
 * **Arayüz Kontrol Modülü:** WCAG 2.1 kurallarına göre renk kontrastı denetimi yapar; altyazılarda standart "opak siyah blok üstüne beyaz yazı" kontrast kuralını uygular ve kullanıcıya boyut/konum ayarlama olanağı sunar.
-* **Onay ve Puanlama Paneli:** İçerik üreticisinin kontrol yetkisini (user autonomy) koruyan, Yapay Zeka önerilerini düzenlemesini sağlayan ve 100 puan üzerinden erişilebilirlik puanı hesaplayan bir oyunlaştırma (teşvik) paneli barındırır.
+* **Onay ve Puanlama Paneli:** İçerik üreticisinin kontrol yetkisini koruyan, Yapay Zeka önerilerini düzenlemesini sağlayan ve erişilebilirlik puanı hesaplayan bir oyunlaştırma paneli barındırır.
+
 
 *Proje Sınırları Dışında Kalanlar:* Canlı yayınlar için eş zamanlı altyazı oluşturma, işaret dili avatar simülasyonu, konuşmacı ayrımı ve arka plan ses efekti algılama bu projenin kapsamı dışında tutulmuş olup gelecek geliştirmeler olarak planlanmıştır.
 
 **İzlenecek Yöntem:**
-Akademik ve teknik çalışmalar W3C (WCAG 2.1 ve WebVTT) standartlarına dayandırılmıştır. Sistem, Python (FastAPI) backend üzerinde Whisper (ASR) ve Vision-Language (VLM) modellerinin entegrasyonuyla geliştirilmiştir. Proje; gönderi yükleme, altyazı/alt-text düzenleme ve erişilebilirlik puanının dinamik değiştiği çalışan bir web prototipiyle (MVP) doğrulanmış ve çalışır hale getirilmiştir. Kaynak kodlar ve commit geçmişi [GitHub deposunda](https://github.com/erisilebilir-destek/erisilebilir-destek) paylaşılmıştır. Bu altyapı, gelecekte cihaz üzerinde çalışan (on-device) yerel Yapay Zeka modellerinin eğitilmesine zemin hazırlamaktadır.
+Akademik ve teknik çalışmalar W3C standartlarına dayandırılmıştır. Sistem, Python backend üzerinde Whisper ve Vision-Language modellerinin entegrasyonuyla geliştirilmiştir. Proje; gönderi yükleme, altyazı/alt-text düzenleme ve erişilebilirlik puanının dinamik değiştiği çalışan bir web prototipiyle doğrulanmış ve çalışır hale getirilmiştir. Kaynak kodlar ve commit geçmişi [GitHub deposunda](https://github.com/erisilebilir-destek/erisilebilir-destek) paylaşılmıştır. Bu altyapı, gelecekte cihaz üzerinde çalışan yerel Yapay Zeka modellerinin eğitilmesine zemin hazırlamaktadır.
+
 
 
 
@@ -53,12 +56,13 @@ Akademik ve teknik çalışmalar W3C (WCAG 2.1 ve WebVTT) standartlarına dayand
 Sosyal medya ekosistemi, milyarlarca insanın bilgiye eriştiği ve etkileşime girdiği ana mecra haline gelmiştir. Ancak bu içerikler, engelli bireyler için aynı düzeyde erişilebilir değildir. Dünya Sağlık Örgütü (WHO) verilerine göre, küresel ölçekte **2,2 milyardan fazla görme engelli** ve **430 milyondan fazla işitme engelli** birey yaşamaktadır. Türkiye'de genel internet kullanım oranı %90'ın üzerinde olsa da, engelli bireyler dijital içeriklerin erişilebilirlik bariyerleri nedeniyle sosyal medya ekosisteminden dışlanmaktadır.
 
 **Problemin Boyutunu Gösteren Somut Veriler:**
-* **Eksik Görsel Açıklamaları (Alt-Text):** Sosyal medya yayıncılarının yalnızca **%25'i** görsellerinde alternatif metin kullanmaktadır ve tüm görsellerini erişilebilir kılan tek bir büyük yayıncı bulunmamaktadır. Web sitelerindeki en yaygın erişilebilirlik hatalarının **%61'i** tamamen eksik alternatif metinlerden kaynaklanmaktadır.
-* **Eksik ve Hatalı Altyazılar:** Web videolarının yalnızca **%28'i** erişilebilirlik standartlarını karşılayan doğru altyazılara sahiptir. Geri kalan %72'lik kısım ise ya hiç altyazı içermemekte ya da kelime hata oranı (WER) yüksek, zaman damgaları kaymış ham otomatik transkripsiyonlarla yayınlanmaktadır.
-* **Sessiz İzleme Alışkanlığı:** Araştırmalar, sosyal medya videolarının yaklaşık **%85'inin sessiz (ses kapalı)** izlendiğini göstermektedir. Bu durum, altyazı eksikliğinin yalnızca işitme engellileri değil, tüm kullanıcı kitlesini olumsuz etkilediğini kanıtlamaktadır.
+* **Eksik Görsel Açıklamaları (Alternatif Metin):** Sosyal medya yayıncılarının yalnızca **%25'i** görsellerinde alternatif metin kullanmaktadır ve tüm görsellerini erişilebilir kılan tek bir büyük yayıncı bulunmamaktadır. Web sitelerindeki en yaygın erişilebilirlik hatalarının **%61'i** tamamen eksik alternatif metinlerden kaynaklanmaktadır.
+* **Eksik ve Hatalı Altyazılar:** Web videolarının yalnızca **%28'i** erişilebilirlik standartlarını karşılayan doğru altyazılara sahiptir. Geri kalan %72'lik kısım ise ya hiç altyazı içermemekte ya da kelime hata oranı yüksek, zaman damgaları kaymış ham otomatik transkripsiyonlarla yayınlanmaktadır.
+* **Sessiz İzleme Alışkanlığı:** Araştırmalar, sosyal medya videolarının yaklaşık **%85'inin sessiz** izlendiğini göstermektedir. Bu durum, altyazı eksikliğinin yalnızca işitme engellileri değil, tüm kullanıcı kitlesini olumsuz etkilediğini kanıtlamaktadır.
 
 **Mevcut Çözümlerin Yetersiz Kalma Nedenleri:**
-1. **Paylaşım Sonrası (Post-Factum) Süreç:** Instagram ve YouTube gibi platformlar altyazıları içerik paylaşıldıktan sonra üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine ve jenerik hataların paylaşım öncesinde düzeltilememesine yol açar.
+1. **Paylaşım Sonrası Süreç:** Instagram ve YouTube gibi platformlar altyazıları içerik paylaşıldıktan sonra üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine ve hataların paylaşım öncesinde düzeltilememesine yol açar.
+
 2. **Erişilebilirlik Araçlarının Gizlenmesi:** Alternatif metin ekleme özellikleri "gelişmiş ayarlar" menülerinin altına gizlenmiştir. İçerik üreticilerinin %99'u bu özelliklerin varlığından ve nasıl kullanılacağından habersizdir.
 3. **Teşvik ve Oyunlaştırma Eksikliği:** Mevcut platformlar, içerik üreticilerini içeriklerini erişilebilir kılmaya teşvik edecek hiçbir motivasyon veya organik ödüllendirme (puan, görünürlük avantajı vb.) sunmamaktadır.
 
@@ -68,16 +72,17 @@ Geliştirdiğimiz **NSosyal Erişilebilir Destek** projesi; sosyal medya paylaş
 
 
 ### 2.2.1. Çözüm Fikri ve Güçlü Yönleri
-Sistemimiz, içerik üreticisi gönderisini (görsel, video, metin) hazırlayıp "Paylaş" butonuna basmadan hemen önce devreye girer. API Gateway ve FastAPI tabanlı Orkestrasyon Servisi üzerinden tetiklenen Yapay Zeka modülleri (Gemini 3.6 Flash ve OpenAI Whisper), içeriği saniyeler içinde analiz eder. Görseller için otomatik alternatif metin (alt-text) üretilir, videolardaki konuşmalar zaman damgalı altyazılara dönüştürülür ve metinlerin WCAG standartlarına uygun renk kontrastı (siyah kutu üzerine beyaz yazı) denetlenir. 
+Sistemimiz, içerik üreticisi gönderisini hazırlayıp "Paylaş" butonuna basmadan hemen önce devreye girer. API Gateway ve FastAPI tabanlı Orkestrasyon Servisi üzerinden tetiklenen Yapay Zeka modülleri (Gemini 3.6 Flash ve OpenAI Whisper), içeriği saniyeler içinde analiz eder. Görseller için otomatik alternatif metin üretilir, videolardaki konuşmalar zaman damgalı altyazılara dönüştürülür ve metinlerin WCAG standartlarına uygun renk kontrastı (siyah kutu üzerine beyaz yazı) denetlenir. 
 
 **Çözümün En Güçlü Yönleri:**
-* **Bilişsel Yükü Sıfırlama:** İçerik üreticisi sıfırdan altyazı veya alt-text yazmakla uğraşmaz; Yapay Zekanın hazırladığı hazır önerileri tek tıkla onaylar veya saniyeler içinde düzenler.
+* **Bilişsel Yükü Sıfırlama:** İçerik üreticisi sıfırdan altyazı veya alternatif metin yazmakla uğraşmaz; Yapay Zekanın hazırladığı hazır önerileri tek tıkla onaylar veya saniyeler içinde düzenler.
 * **Kapsayıcı Tasarım:** Arayüzün kendisi de ekran okuyucu ve klavye navigasyonu uyumlu tasarlanarak engelsiz bir içerik üretme deneyimi sunar.
 
 ### 2.2.2. Projenin Özgün Yönü ve Yenilikçi Yaklaşımı
 Mevcut sosyal medya platformlarının sunduğu otomatik erişilebilirlik çözümlerine kıyasla projemiz dört yenilikçi yaklaşımla ayrışır:
-1. **Paylaşım Öncesi (Pre-publishing) Analiz:** Yaygın platformlar altyazıyı içerik paylaşıldıktan sonra (post-factum) üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine veya alternatif metinlerin hiç eklenememesine yol açar. Projemiz analizi **paylaşım öncesinde** yaparak hataların yayına girmesini donanımsal olarak engeller.
-2. **Hibrit Türkçe NLP / Doğrulama Katmanı (Bizim Yaklaşımımız):** Standart Yapay Zeka modelleri (Whisper, Gemini vb.) Türkçe gibi eklemeli dillerde noktalama, kesme işaretleri ve hece tekrarlarında hatalar yapabilmektedir. Geliştirdiğimiz **Türkçe Post-Processing Katmanı**, ham Yapay Zeka çıktılarını Türkçe morfolojik yapısına göre düzelterek W3C standardında WebVTT (.vtt) formatına çevirir.
+1. **Paylaşım Öncesi Analiz:** Yaygın platformlar altyazıyı içerik paylaşıldıktan sonra üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine veya alternatif metinlerin hiç eklenememesine yol açar. Projemiz analizi **paylaşım öncesinde** yaparak hataların yayına girmesini engeller.
+2. **Hibrit Türkçe NLP / Doğrulama Katmanı:** Standart Yapay Zeka modelleri Türkçe gibi eklemeli dillerde noktalama, kesme işaretleri ve hece tekrarlarında hatalar yapabilmektedir. Geliştirdiğimiz **Türkçe Post-Processing Katmanı**, ham Yapay Zeka çıktılarını Türkçe dil yapısına göre düzelterek W3C standardında WebVTT formatına çevirir.
+
 3. **Oyunlaştırma (Erişilebilirlik Skoru 0-100):** İçerik üreticilerinin erişilebilir içerik üretme motivasyonunu artırmak amacıyla 100 puanlık bir teşvik motoru sunar. Puanı yükselen içeriklerin platform içi erişim (SEO/keşfet) oranları artırılarak katılım ödüllendirilir.
 
 ### 2.2.3. Yerlilik ve NSosyal Platform Uyumu
