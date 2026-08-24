@@ -108,19 +108,41 @@ Mevcut sosyal medya platformlarının sunduğu otomatik erişilebilirlik çözü
 
 # TEKNOLOJİ KULLANIMI
 
-**3.1. İzlenecek Yöntem, Altyapı ve Sürüm Kontrolü**
+**3.1. Teknik Altyapı, Veri Akışı ve Sürüm Kontrolü**
 
-Projemizin teknik altyapısı, modern mikroservis esintili monolitik bir mimariyle tasarlanmış ve modüler yazılım geliştirme prensiplerine uygun olarak kodlanmıştır.
+Bu bölüm, Erişilebilir Destek platformunda kullanılan teknolojileri, verinin sistem içinde nasıl aktığını ve projenin sürüm kontrolü düzenini açıklamaktadır. Kullanılan programlama dili, framework, model servisleri ve veri akışı tablolar halinde sunulmuş; her tercihin gerekçeleri detaylandırılmıştır. Teknoloji kararları alınırken performans, erişilebilirlik, ekip içi iş birliği ve uzun vadeli sürdürülebilirlik kriterleri göz önünde bulundurulmuştur.
 
-### 3.1.1. Teknik Altyapı ve Yazılım Stack'i
-* **Programlama Dili:** Python 3.14 (Yüksek performanslı veri işleme ve Yapay Zeka entegrasyonu için).
-* **Backend Web Çatısı:** FastAPI (Asenkron -async- yapısı sayesinde yüksek eşzamanlı istek işleme performansı ve otomatik interaktif Swagger/OpenAPI dokümantasyonu).
-* **ORM ve Veri Tabanı:** SQLAlchemy & SQLite (Geliştirme ve prototipleme aşamasında hafifliği için SQLite tercih edilmiş, ORM katmanı sayesinde tek bir satır değişikliğiyle PostgreSQL üretimine -production- geçebilecek şekilde tasarlanmıştır).
-* **Yapay Zeka Entegrasyonu:** Google GenAI Python SDK (Gemini 3.6 Flash erişimi için) ve OpenAI Whisper (Konuşma transkripsiyonu için).
-* **Güvenlik:** JWT (JSON Web Token) tabanlı durumsuz (stateless) kimlik doğrulama katmanı.
+### 3.1.1. Teknoloji Yığını ve Seçim Gerekçeleri
+Sistem, bağımsız olarak geliştirilebilen ve modüler olarak bütünleşen katmanlardan oluşmaktadır. Sunucu tarafında ana programlama dili olarak Python tercih edilmiştir. Bunun temel gerekçesi, projedeki Yapay Zeka bileşenlerinin de ağırlıklı olarak Python ekosisteminde geliştirilmiş olmasıdır. Bu sayede backend ile Yapay Zeka modülleri arasındaki uyum maksimum seviyeye çıkarılmıştır.
+
+Framework tarafında FastAPI ve Flask karşılaştırılmış, tercih FastAPI yönünde yapılmıştır. FastAPI; Yapay Zeka sorguları gibi uzun süren süreçleri asenkron olarak yürütebildiği için yüksek performans sunmakta, tip denetimleri sayesinde olası hataları derleme aşamasında yakalamakta ve yazılan koddan otomatik olarak etkileşimli API dokümantasyonu (Swagger/OpenAPI) üretmektedir. Bu özellikler modüllerin ortak bir sözleşmeyle birleştirilmesini kolaylaştırmıştır.
+
+Verilerin ilişkisel bütünlüğünü korumak ve JSON alanlarıyla esnek veri saklama olanağı sunmak amacıyla veritabanı katmanında PostgreSQL tercih edilmiştir. Geliştirme sürecinde ise SQLite kullanılmış, SQLAlchemy ORM soyutlaması sayesinde kod değişikliği gerektirmeden PostgreSQL üretimine geçiş altyapısı kurulmuştur. Katmanlar arası iletişim, dilden bağımsız standart REST (JSON) protokolü üzerinden gerçekleşmektedir. Kullanıcı arayüzü ise W3C/WCAG 2.1 erişilebilirlik standartlarına uygun olarak kodlanmıştır.
+
+| Katman | Kullanılan Teknoloji | Görev ve Gerekçe |
+| :--- | :--- | :--- |
+| **Kullanıcı Arayüzü** | Erişilebilir Web Arayüzü (HTML5, CSS3, JavaScript; WCAG 2.1) | Ekran okuyucu uyumu, klavye ile gezinme, yüksek kontrast ve ölçeklenebilir yazı gibi erişilebilirlik ihtiyaçlarını karşılar. |
+| **Backend** | Python 3, FastAPI (Flask de değerlendirildi) | Asenkron istek işleyerek hızlı çalışır, otomatik API dokümantasyonu üretir ve Python tabanlı Yapay Zeka kütüphaneleriyle sorunsuz çalışır. |
+| **API** | REST (JSON) | Arayüz, backend ve modüller arasındaki iletişimi dilden bağımsız ortak bir sözleşmeyle kurar. |
+| **Veritabanı** | PostgreSQL / SQLite (SQLAlchemy ORM) | Kullanıcı, içerik ve işlem sonuçlarını ilişkisel olarak güvenle saklar; JSON alanlarıyla esnek veri de tutabilir. |
+| **Model Servisleri** | Görüntü tanıma, konuşma tanıma (ASR), dil modeli (LLM) | Modüllerin ürettiği alternatif metin, altyazı ve sadeleştirme çıktılarının arkasındaki Yapay Zeka bileşenleridir. |
+| **Sürüm Kontrolü** | Git, GitHub (Organization) | Kodun sürümlenmesini, ekipçe eş zamanlı geliştirmeyi ve katkıların izlenmesini sağlar. |
+
+**Tablo 3.1.** Katmanlara göre teknoloji yığını ve seçim gerekçeleri.
+
+Platformun sunduğu çıktıların arkasında yer alan Yapay Zeka modülleri ve kullandıkları model servisleri aşağıdaki tabloda listelenmiştir:
+
+| Modül | Kullanılan Model Servisi | Üretilen Çıktı |
+| :--- | :--- | :--- |
+| **Görsel Açıklama** | Görüntü tanıma (vision / captioning) | Nesne ve ortam analizine dayalı Türkçe alternatif metin. |
+| **Otomatik Altyazı** | Konuşma tanıma (ASR) | Zaman kodlarıyla düzenlenmiş Türkçe altyazı. |
+| **Sadeleştirme (NLP)** | Dil modeli (LLM) | Özetlenmiş, sade Türkçe metin çıktısı. |
+| **Erişilebilirlik Kontrolü** | Kural tabanlı analiz ve dil modeli | Kontrast, yazı boyutu ve okunabilirlik puanı ile iyileştirme önerileri. |
+
+**Tablo 3.2.** Yapay Zeka modülleri ve kullanılan model servisleri.
 
 ### 3.1.2. Backend Dizin Yapısı (Modüler Mimarimiz)
-Geliştirilen backend iskeleti, sorumlulukların ayrılması (Separation of Concerns) ilkesine dayanır:
+Geliştirilen backend iskeleti, sorumlulukların ayrılması ilkesine dayanır ve dizin yapısı şu şekildedir:
 
 ```text
 backend/
@@ -132,7 +154,7 @@ backend/
 │   │   └── analyze.py      # Ana analiz uç noktası (/api/v1/analyze)
 │   ├── services/           # Yapay Zeka ve İş Mantığı Servisleri
 │   │   ├── orchestration.py# İş akışını yöneten orkestrasyon motoru
-│   │   ├── alt_text_service.py # Gemini 3.6 Flash alt-text üretici
+│   │   ├── alt_text_service.py # Gemini 3.6 Flash alternatif metin üretici
 │   │   ├── subtitle_service.py # Whisper tabanlı altyazı motoru
 │   │   ├── readability_service.py # Okunabilirlik ve kontrast denetleyici
 │   │   └── simplification_service.py # Metin sadeleştirme servisi
@@ -145,13 +167,53 @@ backend/
 └── README.md               # Kurulum ve lokal çalıştırma kılavuzu
 ```
 
-### 3.1.3. Sürüm Kontrolü ve İş Birliği
-Proje kod tabanının versiyon yönetimi ve ekip içi iş birliği süreçleri aktif olarak Git ve GitHub aracılığıyla yönetilmektedir. Geliştirme adımları anlamlı commit mesajları ile izlenmektedir.
+### 3.1.3. Veri Akışı
+Verinin sistemdeki yolculuğu, kullanıcının arayüzden gönderdiği bir istekle başlar ve erişilebilir çıktının kullanıcıya ulaşmasıyla tamamlanır. Bu akış katmanlar arasında sırayla ilerlemekte olup adımları aşağıdaki tabloda özetlenmiştir:
 
-* **Resmi Git Deposu (Repository):** [erisilebilir-destek/erisilebilir-destek](https://github.com/erisilebilir-destek/erisilebilir-destek)
-* **Temel Git Akış Kuralı:** Geliştirilen tüm Yapay Zeka modülleri ve iskelet tasarımlar yerel olarak test edilip doğrulandıktan sonra uzak depoya push edilmektedir. Değişiklik geçmişi depoda kayıt altındadır.
+| Adım | Bileşen | İşlem |
+| :--- | :--- | :--- |
+| **1** | Kullanıcı → Arayüz | Kullanıcı; görsel, video veya metin içeriğini arayüzden gönderir. İstek HTTPS ile şifreli iletilir. |
+| **2** | API Gateway + Kimlik Doğrulama | İstek backend'e ulaşır, JWT ile kimlik doğrulanır ve Orkestrasyon Servisine aktarılır. |
+| **3** | Orkestrasyon → İlgili Modül | İstek türüne bakılarak ilgili Yapay Zeka modülüne yönlendirilir. |
+| **4** | Modül → Model Servisi | İlgili model (görsel betimleme, ASR, LLM) çağrılır, Türkçe çıktı üretilir; medya dosyaları depolamadan okunur veya yazılır. |
+| **5** | Orkestrasyon → Veritabanı | Sonuç toparlanır, SQLite/PostgreSQL veritabanına kaydedilir ve JSON olarak API Gateway'e döner. |
+| **6** | Gateway → Arayüz | Üretilen erişilebilir çıktı (alternatif metin, altyazı, sade metin veya puan) kullanıcıya sunulur. |
+
+**Tablo 3.3.** Sistemdeki veri akışının adımları.
+
+Bu düzen sayesinde modüller bağımsız geliştirilseler dahi sistem bir bütün olarak tutarlı çıktı vermektedir. Akışın görselleştirilmiş hali sistem mimari şemasında sunulmuştur.
+
+### 3.1.4. Sürüm Kontrolü ve Depo Düzeni
+Projenin kod tabanı Git ile yönetilmekte ve uzak depo olarak GitHub kullanılmaktadır. Depo, bireysel hesap yerine bir GitHub Organizasyonu altında toplanmıştır (Adres: [https://github.com/erisilebilir-destek/erisilebilir-destek](https://github.com/erisilebilir-destek/erisilebilir-destek)). Bu sayede ekip üyelerinin katkıları şeffaf bir şekilde izlenebilmekte ve yetki yönetimi güvenli bir şekilde yapılmaktadır.
+
+Depo, backend kodları, API uç noktaları, veritabanı katmanı, Yapay Zeka modülleri, kullanıcı arayüzü ve dokümantasyon (`docs`) klasörlerini barındıracak şekilde organize edilmiştir. 
+
+Karışıklıkları önlemek adına dallanmaya (branch) dayalı bir iş akışı benimsenmiştir:
+
+| Dal (Branch) | Amaç |
+| :--- | :--- |
+| **main** | Projenin her zaman çalışır durumdaki kararlı ana dalıdır. Buraya doğrudan gönderim kapalıdır; değişiklikler yalnızca gözden geçirilmiş birleştirme istekleriyle (pull request) girer. |
+| **feature/\*** | Her modül veya özellik için açılan geliştirme dallarıdır (örneğin `feature/gorsel-aciklama`, `feature/altyazi`). Üyeler birbirini etkilemeden paralel çalışır. |
+| **fix/\*** | Mevcut bir işlevdeki hatayı düzeltmek için açılan kısa ömürlü dallardır. |
+
+**Tablo 3.4.** Sürüm kontrolü dallanma düzeni.
+
+Değişiklik geçmişinin takibini kolaylaştırmak amacıyla commit mesajlarında belirli ön ekler kullanılmaktadır:
+
+| Ön ek | Anlamı | Örnek Commit Mesajı |
+| :--- | :--- | :--- |
+| **feat** | Yeni özellik ekleme | `feat: görsel açıklama modülü eklendi` |
+| **fix** | Hata düzeltme | `fix: altyazı zaman kodu hatası giderildi` |
+| **docs** | Dokümantasyon değişikliği | `docs: README ve mimari güncellendi` |
+| **refactor** | Kod düzenleme (işlev değişmeden) | `refactor: API yönlendirme sadeleştirildi` |
+| **test** | Test ekleme veya düzenleme | `test: sadeleştirme modülü testleri eklendi` |
+
+**Tablo 3.5.** Commit mesajı yazım düzeni.
+
+Bu kuralların yanı sıra, her birleştirme isteğinin (pull request) en az bir ekip arkadaşı tarafından gözden geçirilmesi kuralı uygulanmakta ve gereksiz sistem dosyalarının depoya girmesini engellemek için `.gitignore` dosyası kullanılmaktadır.
 
 ![FastAPI Swagger API Dokümantasyonu Arayüzü](file:///c:/Users/zeyne/OneDrive/Masaüstü/my-agy-projects/api_docs_screenshot.png)
+
 
 **3.2. Model ve Veri Doğrulama**
 
