@@ -303,17 +303,31 @@ Aşağıdaki görselde, afiş analizi sonucunda görsel betimleme servisimizin �
   - **OCR Doğruluğu:** Görseldeki tüm yazılı metinler, tarihler ve kurum logoları %100 doğrulukla okunmuş ve alternatife dahil edilmiştir.
   - **Bağlamsal Betimleme:** Antik yapı ile robotik nesnelerin ilişkisi jüri standartlarına uygun şekilde nesnel olarak cümlelere dökülmüştür.
 
-### 3.2.5. API ve Sınır Değerleri Test Senaryoları
+### 3.2.5. API ve Kalite Güvence (QA) Testleri
+Geliştirilen backend uç noktalarının kararlılığını, zararlı/hatalı girdilere karşı dayanıklılığını ve uç durum (edge case) güvenliğini doğrulamak amacıyla `test_api_qa.py` üzerinden otomatikleştirilmiş 13 farklı entegrasyon test senaryosu çalıştırılmıştır.
 
-Geliştirilen backend uç noktalarının kararlılığını ve güvenliğini sağlamak amacıyla Nez'in yönetiminde hazırlanan API doğrulama ve hata işleme (boundary/sınır değer) test senaryoları aşağıdaki gibidir:
+**Test Metodolojisi:**
+FastAPI `TestClient` ve `pytest` kütüphaneleri kullanılarak; sistem sağlığı, eksik form alanları, boş ve aşırı büyük dosyaların engellenmesi, desteklenmeyen biçimlerin (.exe dosyaları gibi) filtrelenmesi, görsel/metin/video analiz akışları ve veri güvenliği test edilmiştir.
 
-| Test ID | Test Edilen Durum | Girdi (Payload) | Beklenen Durum (HTTP) | Beklenen Hata Mesajı / Yanıt |
+**Kritik Hata Doğrulama ve Düzeltme (QA) Bulguları:**
+* **İlk Test Sonuçları:** Yapılan ilk otomatik test koşumlarında 13 senaryodan 11'i başarıyla geçmiş (PASS), 2 senaryo ise güvenlik ve çakışma nedeniyle başarısız (FAIL) olmuştur:
+  1. *Dosya Dizin Atlama (Path Traversal) Riski:* Yüklenen dosya adlarındaki `../` gibi dizin atlama parametrelerinin güvenli dosya yollarını aşabildiği tespit edilmiştir.
+  2. *Dosya Çakışma Riski:* Aynı isimli iki farklı dosya yüklendiğinde dosya yollarının çakışarak birbirinin üzerine yazabildiği görülmüştür.
+* **Uygulanan Düzeltici Faaliyetler:** Tespit edilen bu 2 açık, backend dosya kayıt fonksiyonlarında Python `uuid` kütüphanesi kullanılarak her yüklemeye benzersiz kimlik atanması ve dosya adlarının temizlenmesiyle tamamen çözülmüştür. Yenilenen testler sonucunda tüm güvenlik ve stabilite doğrulamaları başarıyla geçmiştir (**13/13 PASS**).
+
+Aşağıdaki tablo, kalite güvence kapsamında test edilen kritik sınır değerlerin ve uç durumların özetini sunmaktadır:
+
+| Test ID | Test Edilen Durum | Girdi (Payload) | Beklenen Durum (HTTP) | Sonuç Durumu |
 | :--- | :--- | :--- | :--- | :--- |
-| **TS_01** | Geçerli Dosya Analizi (Mutlu Yol) | `teknofest_test.jpg` (350 KB, Görsel) | `200 OK` | `durum: "basarili"`, `otomatik_alt_text` betimlemesi. |
-| **TS_02** | Boş Dosya Gönderimi | `bos_dosya.jpg` (0 byte) | `400 Bad Request` | `detail: "Dosya boş görünüyor. Lütfen geçerli bir dosya gönderin."` |
-| **TS_03** | Desteklenmeyen Format | `belge.pdf` (PDF dosyası) | `415 Unsupported Type`| `detail: "Desteklenmeyen dosya türü: application/pdf..."` |
-| **TS_04** | Aşırı Büyük Dosya | `buyuk_video.mp4` (> 25 MB) | `413 Entity Too Large` | `detail: "Dosya çok büyük. En fazla 25 MB kabul edilir."` |
-| **TS_05** | Misafir/Yetkisiz Giriş | Token olmadan API isteği | `200 OK` (Misafir Modu)| İstek başarıyla işlenir ancak veritabanında `user_id: null` olarak işaretlenir. |
+| **TC-01** | Sistem Sağlığı (Health Check) | GET / | `200 OK` (calisiyor) | ✅ Başarılı (PASS) |
+| **TC-03** | Boş Dosya Yükleme Engeli | `empty.png` (0 byte) | `400 Bad Request` | ✅ Başarılı (PASS) |
+| **TC-04** | Desteklenmeyen Biçim Engeli | `malicious.exe` (Çalıştırılabilir) | `415 Unsupported Type`| ✅ Başarılı (PASS) |
+| **TC-05** | Aşırı Büyük Dosya Engeli | > 25 MB boyutlu video | `413 Payload Too Large`| ✅ Başarılı (PASS) |
+| **TC-09** | Dizin Atlama Güvenliği | `../../kotucul.jpg` | Yol temizleme (Atlama engeli) | ✅ Başarılı (Düzeltildi) |
+| **TC-10** | Dosya Çakışma Güvenliği | Aynı isimli iki dosya | Farklı UUID dosya yolları | ✅ Başarılı (Düzeltildi) |
+
+**Tablo 3.6.** Kalite güvence (QA) kritik test matrisi ve sonuçları.
+
 
 **3.3. Kullanıcı Deneyimi (UI/UX) Tasarımı**
 
