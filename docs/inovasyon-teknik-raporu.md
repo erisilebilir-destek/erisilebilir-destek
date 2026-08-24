@@ -225,17 +225,16 @@ Projemizde yer alan Yapay Zeka ve veri analitiği süreçleri, yüksek doğruluk
 
 ### 3.2.2. Otomatik Altyazı (ASR) Model ve Araç Karşılaştırması
 
-Sistemimizin ses tanıma omurgasını oluşturmak amacıyla literatürdeki ve endüstrideki alternatif ASR modelleri ve medya işleme araçları karşılaştırılmıştır:
+Sistemimizin ses tanıma omurgasını oluşturmak amacıyla literatürdeki ve endüstrideki alternatif ASR modelleri ve medya işleme araçları karşılaştırılmış ve seçim gerekçeleri şu şekilde detaylandırılmıştır:
 
-| Bileşen / Model / Yöntem | Sistemdeki Rolü (Görevi) | Güçlü Yönleri (Avantajları) | Zayıf Yönleri / Sınırları | Projedeki Kullanım Yeri ve Amacı |
-| :--- | :--- | :--- | :--- | :--- |
-| **FFmpeg** | Medya İşleme & Montaj Katmanı | • Çok hızlı ses ayrıştırma (video -> .wav).<br/>• Altyazıyı videoya piksellerle çizme (hardsub) veya dosya olarak gömme (softsub).<br/>• Ses normalizasyonu ve gürültü filtreleme. | • Yapay Zeka değildir.<br/>• Sesi anlayamaz, konuşmaları metne dökemez. | Pipeline'ın başında videodan temiz ses üretmek; pipeline'ın sonunda altyazılı nihai videoyu render etmek. |
-| **Whisper (Base / Small)** | Hafif ASR Motoru | • Çok düşük donanım kaynağı (RAM/GPU) gereksinimi.<br/>• Düşük gecikme süresi (Hızlı transkripsiyon). | • Türkçe gibi eklemeli dillerde kelime hata oranı (WER) yüksektir.<br/>• Noktalama ve eklerde hata yapabilir. | Düşük donanımlı cihazlarda veya önizleme ekranlarında hızlı taslak altyazı çıkarmak için kullanılır. |
-| **Whisper (Large-v3 / Turbo)** | Gelişmiş ASR Çekirdeği | • Türkçe konuşmaları anlama ve zaman damgası (timestamp) doğruluğu çok yüksektir.<br/>• Arka plan gürültüsüne ve aksanlara dayanıklıdır. | • Yüksek GPU kaynağı gerektirir.<br/>• Saf haliyle argo, özel isim ve tam dil bilgisi kurallarında bazen düzeltme ister. | Sistemin omurgasını oluşturan ana Türkçe konuşma tanıma motoru. |
-| **Whisper + Türkçe NLP / Kural Katmanı (Bizim Yaklaşımımız)** | Hibrit Altyazı & Doğrulama Katmanı | • Ham metindeki Türkçe ek, imla ve noktalama hatalarını düzeltir.<br/>• W3C/WCAG standartlarına tam uyumlu WebVTT formatı üretir. | • Sisteme ek bir işlem adımı (1-2 saniye gecikme) ekler. | **Projenin Özgün Değeri:** Yapay Zekanın ürettiği altyazıyı erişilebilirlik standartlarına uygun hale getiren düzeltme ve formatlama katmanı. |
-| **Wav2Vec2 (Türkçe Fine-Tuned)** | Alternatif Türkçe ASR | • Sadece yerel Türkçe veri setleriyle eğitildiği için yerli konuşma kalıplarında başarılıdır. | • Çok dilli ve gürültülü ortamlarda Whisper kadar esnek değildir.<br/>• Müzik/efekt içeren videolarda başarımı düşer. | Proje raporunda Whisper'ın neden tercih edildiğini savunmak için kıyaslama/alternatif model olarak kullanılır. |
+* **FFmpeg (Medya İşleme Katmanı):** Çok hızlı ses ayrıştırma (videodan .wav formatına) ve altyazıyı videoya piksellerle çizme (hardsub) veya dosya olarak gömme (softsub) yeteneğine sahiptir. Yapay zeka yeteneği olmasa da, pipeline'ın başında videodan temiz ses üretmek ve sonunda altyazılı nihai videoyu render etmek amacıyla kullanılmıştır.
+* **Whisper Base / Small (Hafif ASR Motoru):** Düşük donanım kaynağı gereksinimi ve çok düşük gecikme süresi ile öne çıkar. Ancak Türkçe gibi eklemeli dillerde kelime hata oranı yüksek olduğu için projenin ana omurgası yerine sadece hızlı taslak önizleme aşamalarında değerlendirilmiştir.
+* **Whisper Large-v3 / Turbo (Gelişmiş ASR Çekirdeği):** Türkçe konuşmaları anlama ve zaman damgası doğruluğu son derece yüksektir; arka plan gürültülerine karşı dayanıklıdır. Yüksek donanım kaynağı gerektirse de sistemin ana konuşma tanıma motoru olarak entegre edilmiştir.
+* **Whisper + Türkçe NLP / Kural Katmanı (Hibrit Yaklaşımımız):** Yapay zekanın ürettiği altyazıyı erişilebilirlik standartlarına uygun hale getiren özgün değerimizdir. Ham metindeki Türkçe imla hatalarını düzeltir ve W3C/WCAG standartlarına tam uyumlu WebVTT formatı üretir.
+* **Wav2Vec2 Türkçe Fine-Tuned (Alternatif Türkçe ASR):** Yerel Türkçe veri setleriyle eğitildiği için yerli konuşma kalıplarında başarılıdır ancak çok dilli ve gürültülü ortamlarda Whisper kadar esnek olmaması ve müzik/efekt içeren videolarda başarımının düşmesi nedeniyle projenin odağı dışında tutulmuş ve kıyaslama modeli olarak kullanılmıştır.
 
 #### Altyazı Modülü Veri Akış Aşamaları (ASR Pipeline):
+
 
 ```mermaid
 flowchart TD
