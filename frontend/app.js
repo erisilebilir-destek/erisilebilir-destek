@@ -6,7 +6,6 @@ let CURRENT_USER = 'teknofest';
 // Uygulama Durumu (State)
 let selectedFile = null;
 let currentContentId = null;
-let currentScore = 94;
 
 // Ekran Okuyucu Durumu
 let screenReaderEnabled = false;
@@ -28,7 +27,7 @@ function switchView(targetViewId) {
             views[key].classList.remove('active');
         }
     });
-    
+
     if (views[targetViewId]) {
         views[targetViewId].classList.add('active');
     }
@@ -234,7 +233,7 @@ function speak(text) {
 // Ekran okuyucu tıklandığında seslendirme yapması için sayfa tıklamalarını dinleme
 document.addEventListener('click', (e) => {
     if (!screenReaderEnabled) return;
-    
+
     // Erişilebilirlik açıklaması içeren kartlar
     const accBox = e.target.closest('.post-accessibility-info');
     if (accBox) {
@@ -253,7 +252,7 @@ document.addEventListener('click', (e) => {
         speak(postHeader.innerText);
         return;
     }
-    
+
     const badge = e.target.closest('.engelsiz-skor-badge');
     if (badge) {
         speak(badge.innerText);
@@ -293,11 +292,11 @@ fileInput.addEventListener('change', (e) => {
     if (!file) return;
 
     selectedFile = file;
-    
+
     // Önizleme göster
     previewContainer.innerHTML = '';
     const reader = new FileReader();
-    
+
     reader.onload = (event) => {
         if (file.type.startsWith('image/')) {
             const img = document.createElement('img');
@@ -313,14 +312,14 @@ fileInput.addEventListener('change', (e) => {
         uploadPlaceholder.style.display = 'none';
         previewContainer.style.display = 'flex';
         btnCheck.disabled = false;
-        
+
         // Önceki sonuçları sıfırla
         checkResultPlaceholder.style.display = 'block';
         checkResults.style.display = 'none';
         btnShare.disabled = true;
         currentContentId = null;
     };
-    
+
     reader.readAsDataURL(file);
 });
 
@@ -379,7 +378,7 @@ btnCheck.addEventListener('click', async () => {
         checkResults.style.display = 'block';
         btnShare.disabled = false;
         showToast('Erişilebilirlik analizi tamamlandı!');
-        
+
         if (screenReaderEnabled) {
             speak(`Analiz tamamlandı. İçeriğinizin erişilebilirlik puanı yüz üzerinden ${res.genel_erisilebilirlik_puani}. Alternatif metin önerisi: ${res.otomatik_alt_text}`);
         }
@@ -426,14 +425,14 @@ btnShare.addEventListener('click', async () => {
         }
 
         showToast('Gönderiniz başarıyla paylaşıldı!');
-        
+
         // Alanları temizle
         postDescription.value = '';
         approvedAltText.value = '';
         fileInput.value = '';
         selectedFile = null;
         currentContentId = null;
-        
+
         uploadPlaceholder.style.display = 'block';
         previewContainer.style.display = 'none';
         checkResultPlaceholder.style.display = 'block';
@@ -459,7 +458,7 @@ btnShare.addEventListener('click', async () => {
 // Gönderi Akışını Yükle
 async function loadFeed() {
     const feedContainer = document.getElementById('feedContainer');
-    
+
     try {
         const response = await fetch(`${API_BASE_URL}/api/v1/posts`);
         if (!response.ok) {
@@ -482,17 +481,25 @@ async function loadFeed() {
         posts.forEach(post => {
             const card = document.createElement('div');
             card.className = 'post-card';
-            
+
             // Medya yolu dönüşümü (Windows ters eğik çizgilerini düzelt)
             const cleanMediaPath = post.dosya_yolu ? post.dosya_yolu.replace(/\\/g, '/') : '';
             const mediaUrl = `${API_BASE_URL}/${cleanMediaPath}`;
-            
+
             const isVideo = cleanMediaPath.endsWith('.mp4') || cleanMediaPath.endsWith('.webm') || cleanMediaPath.endsWith('.mov');
-            
+
             let mediaHtml = '';
             if (post.dosya_yolu) {
                 if (isVideo) {
-                    mediaHtml = `<video src="${mediaUrl}" controls aria-label="Gönderi videosu"></video>`;
+                    // Üretilen WebVTT altyazısını videoya bağla (işitme engelli kullanıcılar için)
+                    const cleanVttPath = post.analiz?.otomatik_altyazi_yolu
+                        ? post.analiz.otomatik_altyazi_yolu.replace(/\\/g, '/')
+                        : '';
+                    const trackHtml = cleanVttPath
+                        ? `<track kind="captions" srclang="tr" label="Türkçe altyazı" src="${API_BASE_URL}/${cleanVttPath}" default>`
+                        : '';
+                    // crossorigin: altyazı dosyası farklı kaynaktan geldiği için gereklidir
+                    mediaHtml = `<video src="${mediaUrl}" controls crossorigin="anonymous" aria-label="Gönderi videosu">${trackHtml}</video>`;
                 } else {
                     mediaHtml = `<img src="${mediaUrl}" alt="${post.analiz?.otomatik_alt_text || 'Erişilebilir görsel'}">`;
                 }
@@ -567,7 +574,6 @@ async function loadProfile() {
         if (scoreRes.ok) {
             const scoreData = await scoreRes.json();
             profileScore.textContent = scoreData.score;
-            currentScore = scoreData.score;
         }
 
         // 2. Profil Gönderilerini Al
@@ -593,14 +599,14 @@ async function loadProfile() {
 
             const gridItem = document.createElement('div');
             gridItem.className = 'grid-item';
-            
+
             const cleanMediaPath = post.dosya_yolu.replace(/\\/g, '/');
             const mediaUrl = `${API_BASE_URL}/${cleanMediaPath}`;
             const isVideo = cleanMediaPath.endsWith('.mp4') || cleanMediaPath.endsWith('.webm') || cleanMediaPath.endsWith('.mov');
 
             const score = post.analiz?.genel_erisilebilirlik_puani || 100;
             const scoreClass = score < 70 ? 'low-score' : '';
-            
+
             let itemHtml = '';
             if (isVideo) {
                 itemHtml = `<video src="${mediaUrl}#t=0.5" preload="metadata"></video>`;
@@ -642,7 +648,7 @@ async function loadProfile() {
 window.addEventListener('DOMContentLoaded', async () => {
     // Demo kullanıcıyı doğrula veya kaydet
     await ensureDemoUserAuthenticated();
-    
+
     // Varsayılan görünümü aç (Gönderi Akışı)
     switchView('view-feed');
 });

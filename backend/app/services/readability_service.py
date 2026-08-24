@@ -1,8 +1,5 @@
 """
 Okunabilirlik ve Erişilebilirlik Puanlama Servisi.
-
-Bu servis, Beril'in puanlama mantığına (B-04) bağlanacaktır. Şimdilik basit,
-açıklanabilir örnek puanlar üretir ve 0-100 arası genel bir puan hesaplar.
 """
 
 from typing import Optional
@@ -32,7 +29,6 @@ def okunabilirlik_skoru_hesapla(metin: Optional[str]) -> float:
 def genel_puan_hesapla(kontrast: float, okunabilirlik: float, alt_text_var: bool, altyazi_var: bool) -> int:
     """
     0-100 arası genel erişilebilirlik puanı (örnek ağırlıklandırma).
-    TODO: Beril'in 100 puanlık matrisiyle (B-04) değiştirilecek.
     """
     puan = 0.0
     puan += min(25.0, kontrast / 7.0 * 25)          # kontrast (maks 25)

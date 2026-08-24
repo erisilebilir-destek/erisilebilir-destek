@@ -8,7 +8,7 @@ from typing import Optional
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 
-# ---------- Kullanıcı ----------
+#  Kullanıcı
 class UserCreate(BaseModel):
     kullanici_adi: str = Field(min_length=3, max_length=50)
     eposta: EmailStr
@@ -28,7 +28,7 @@ class Token(BaseModel):
     token_type: str = "bearer"
 
 
-# ---------- Analiz sonucu ----------
+# Analiz sonucu
 class AnalysisResultOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     otomatik_alt_text: Optional[str] = None
@@ -48,7 +48,7 @@ class AnalyzeResponse(BaseModel):
     not_: Optional[str] = Field(default=None, alias="not")
 
 
-# ---------- Gönderi (Post) ----------
+# Gönderi
 class PostPublishRequest(BaseModel):
     orijinal_metin: Optional[str] = None
     otomatik_alt_text: Optional[str] = None

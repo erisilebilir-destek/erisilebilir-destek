@@ -6,10 +6,7 @@ NLP modülü hazır olunca gerçek modele bağlanacak. Şimdilik örnek yanıt d
 
 
 def sadelestir(metin: str) -> str:
-    """
-    TODO: Gerçek sadeleştirme modeline bağla.
-    Şimdilik metnin kısa bir önizlemesiyle örnek bir yanıt üretir.
-    """
+
     onizleme = (metin or "").strip().replace("\n", " ")
     if len(onizleme) > 100:
         onizleme = onizleme[:100] + "..."

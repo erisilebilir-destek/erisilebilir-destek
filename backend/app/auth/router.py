@@ -1,5 +1,5 @@
 """
-Kimlik Doğrulama Servisi — kayıt (register) ve giriş (login) uç noktaları,
+Kimlik Doğrulama Servisi — kayıt ve giriş uç noktaları,
 ayrıca istekten mevcut kullanıcıyı çözen bağımlılıklar.
 """
 

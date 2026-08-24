@@ -1,8 +1,6 @@
-# Sistem Mimarisi — Erişilebilir Destek
+# Sistem Mimarisi
 
-Bu belge, **Erişilebilir Destek** platformunun backend ve entegrasyon mimarisini tanımlar.
-Platform; paylaşılan görsel, video ve metin içeriklerini yapay zeka modülleriyle işleyerek
-erişilebilir çıktılar (Türkçe alt metin, altyazı, sade metin, erişilebilirlik puanı) üretir.
+ Backend ve entegrasyon mimarisini oluşturan kısım. Paylaşılan görsel, video ve metin içeriklerini yapay zeka modülleriyle işleyerek erişilebilir çıktılar üretir.
 
 ## Katmanlı mimari şeması
 

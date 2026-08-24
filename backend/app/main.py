@@ -19,6 +19,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from .auth.router import router as auth_router
+from .config import settings
 from .database import Base, engine
 from .routers.analyze import router as analyze_router
 from .routers.posts import router as posts_router
@@ -27,7 +28,7 @@ from .routers.posts import router as posts_router
 Base.metadata.create_all(bind=engine)
 
 # Yükleme klasörünün varlığından emin ol
-os.makedirs("uploads", exist_ok=True)
+os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
 
 app = FastAPI(
     title="Erişilebilir Destek (NSosyal) API",
@@ -37,13 +38,14 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # geliştirme; üretimde arayüz adresine daraltılacak
+    allow_origins=["*"],   
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Statik Dosya Paylaşımı (yüklenen resimler/videolar/altyazılar için)
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+# Dosya Paylaşımı (yüklenen resimler/videolar/altyazılar için).
+# Adres, veritabanında saklanan göreli yolla ("uploads/...") birebir eşleşmelidir.
+app.mount(f"/{settings.UPLOAD_DIR}", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
 # Router'lar
 app.include_router(auth_router)
