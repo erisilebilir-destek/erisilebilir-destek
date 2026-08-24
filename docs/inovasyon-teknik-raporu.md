@@ -49,10 +49,23 @@ Akademik ve teknik çalışmalar W3C (WCAG 2.1 ve WebVTT) standartlarına dayand
 # KATMA DEĞER VE YENİLİKÇİLİK
 
 **2.1. Problem Tanımı ve Mevcut Çözümler**
-Sosyal medya ekosistemindeki gerçek bir sorun nesnel bir şekilde tanımlanır. Problemin büyüklüğünü kanıtlayan resmi kaynaklar, istatistikler ve akademik veriler ile piyasadaki alternatif çözümler ele alınarak bu çözümlerin neden yetersiz kaldığı ortaya konur.
+
+Sosyal medya ekosistemi, milyarlarca insanın bilgiye eriştiği ve etkileşime girdiği ana mecra haline gelmiştir. Ancak bu içerikler, engelli bireyler için aynı düzeyde erişilebilir değildir. Dünya Sağlık Örgütü (WHO) verilerine göre, küresel ölçekte **2,2 milyardan fazla görme engelli** ve **430 milyondan fazla işitme engelli** birey yaşamaktadır. Türkiye'de genel internet kullanım oranı %90'ın üzerinde olsa da, engelli bireyler dijital içeriklerin erişilebilirlik bariyerleri nedeniyle sosyal medya ekosisteminden dışlanmaktadır.
+
+**Problemin Boyutunu Gösteren Somut Veriler:**
+* **Eksik Görsel Açıklamaları (Alt-Text):** Sosyal medya yayıncılarının yalnızca **%25'i** görsellerinde alternatif metin kullanmaktadır ve tüm görsellerini erişilebilir kılan tek bir büyük yayıncı bulunmamaktadır. Web sitelerindeki en yaygın erişilebilirlik hatalarının **%61'i** tamamen eksik alternatif metinlerden kaynaklanmaktadır.
+* **Eksik ve Hatalı Altyazılar:** Web videolarının yalnızca **%28'i** erişilebilirlik standartlarını karşılayan doğru altyazılara sahiptir. Geri kalan %72'lik kısım ise ya hiç altyazı içermemekte ya da kelime hata oranı (WER) yüksek, zaman damgaları kaymış ham otomatik transkripsiyonlarla yayınlanmaktadır.
+* **Sessiz İzleme Alışkanlığı:** Araştırmalar, sosyal medya videolarının yaklaşık **%85'inin sessiz (ses kapalı)** izlendiğini göstermektedir. Bu durum, altyazı eksikliğinin yalnızca işitme engellileri değil, tüm kullanıcı kitlesini olumsuz etkilediğini kanıtlamaktadır.
+
+**Mevcut Çözümlerin Yetersiz Kalma Nedenleri:**
+1. **Paylaşım Sonrası (Post-Factum) Süreç:** Instagram ve YouTube gibi platformlar altyazıları içerik paylaşıldıktan sonra üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine ve jenerik hataların paylaşım öncesinde düzeltilememesine yol açar.
+2. **Erişilebilirlik Araçlarının Gizlenmesi:** Alternatif metin ekleme özellikleri "gelişmiş ayarlar" menülerinin altına gizlenmiştir. İçerik üreticilerinin %99'u bu özelliklerin varlığından ve nasıl kullanılacağından habersizdir.
+3. **Teşvik ve Oyunlaştırma Eksikliği:** Mevcut platformlar, içerik üreticilerini içeriklerini erişilebilir kılmaya teşvik edecek hiçbir motivasyon veya organik ödüllendirme (puan, görünürlük avantajı vb.) sunmamaktadır.
+
 **2.2. Çözüm Fikri, Özgünlük ve Yerlilik**
 
-Geliştirdiğimiz **NSosyal Erişilebilir Destek** projesi; sosyal medya paylaşımlarında erişilebilirliği isteğe bağlı bir eklenti olmaktan çıkarıp, içerik üretim sürecinin pürüzsüz ve doğal bir parçası haline getiren Yapay Zeka destekli bütünleşik bir platform özelliğidir.
+Geliştirdiğimiz **NSosyal Erişilebilir Destek** projesi; sosyal medya paylaşımlarında erişilebilirliği isteğe bağlı bir eklenti veya gizli bir ayar olmaktan çıkarıp, içerik üretim sürecinin pürüzsüz ve doğal bir parçası haline getiren Yapay Zeka destekli bütünleşik bir platform özelliğidir.
+
 
 ### 2.2.1. Çözüm Fikri ve Güçlü Yönleri
 Sistemimiz, içerik üreticisi gönderisini (görsel, video, metin) hazırlayıp "Paylaş" butonuna basmadan hemen önce devreye girer. API Gateway ve FastAPI tabanlı Orkestrasyon Servisi üzerinden tetiklenen Yapay Zeka modülleri (Gemini 3.6 Flash ve OpenAI Whisper), içeriği saniyeler içinde analiz eder. Görseller için otomatik alternatif metin (alt-text) üretilir, videolardaki konuşmalar zaman damgalı altyazılara dönüştürülür ve metinlerin WCAG standartlarına uygun renk kontrastı (siyah kutu üzerine beyaz yazı) denetlenir. 
