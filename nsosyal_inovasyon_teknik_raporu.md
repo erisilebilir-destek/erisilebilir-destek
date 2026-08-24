@@ -1,4 +1,4 @@
-****
+﻿****
 
 
 # İÇİNDEKİLER(Raporun tüm ana başlıkları ve sayfa numaraları eksiksiz olarak listelenecektir.)
@@ -15,14 +15,16 @@
 
 
 
-# PROJE ÖZETİ
+
+# PROJE ÖZETİ
 
 **1.1. Proje Konusu ve Amacı**
-NSosyal Erişilebilir Destek; sosyal medya ekosisteminde üretilen görsel, video ve metin tabanlı içeriklerin paylaşım öncesinde (pre-publishing) analiz edilerek görme, işitme, okuma ve anlama güçlüğü (disleksi, bilişsel veya öğrenme güçlüğü, düşük dijital okuryazarlık) yaşayan kullanıcılar için erişilebilir hale getirilmesini sağlayan yapay zekâ destekli bir içerik üretim asistanıdır. 
+NSosyal Erişilebilir Destek; sosyal medya ekosisteminde üretilen görsel, video ve metin tabanlı içeriklerin paylaşım öncesinde (pre-publishing) analiz edilerek görme, işitme, okuma ve anlama güçlüğü (disleksi, bilişsel veya öğrenme güçlüğü, düşük dijital okuryazarlık) yaşayan kullanıcılar için erişilebilir hale getirilmesini sağlayan yapay zeka destekli bir içerik üretim asistanıdır. 
 
-Projenin odaklandığı temel problem, sosyal medya içeriklerinin ezici çoğunluğunun erişilebilirlik standartlarından yoksun olması ve mevcut altyazı/alternatif metin araçlarının pratik olarak içerik üreticilerinin iş akışına entegre olmamasıdır. Projenin nihai amacı; erişilebilirliği sonradan yapılan bir düzeltme adımı olmaktan çıkarıp, içerik üreticilerinin gönderi paylaşım sürecinin doğal ve pürüzsüz bir parçası haline getirmektir. İçerik üreticilerini teknik detaylarla yormadan; tek tıkla analiz, yapay zekâ (ASR) destekli otomatik altyazı/alternatif metin üretimi ve oyunlaştırılmış "Erişilebilirlik Skoru (0-100)" ile teşvik ederek platform genelinde engelsiz bir dijital alan oluşturulması hedeflenmektedir. 
+Projenin odaklandığı temel problem, sosyal medya içeriklerinin ezici çoğunluğunun erişilebilirlik standartlarından yoksun olması ve mevcut altyazı/alternatif metin araçlarının pratik olarak içerik üreticilerinin iş akışına entegre olmamasıdır. Projenin nihai amacı; erişilebilirliği sonradan yapılan bir düzeltme adımı olmaktan çıkarıp, içerik üreticilerinin gönderi paylaşım sürecinin doğal ve pürüzsüz bir parçası haline getirmektir. İçerik üreticilerini teknik detaylarla yormadan; tek tıkla analiz, yapay zeka (ASR) destekli otomatik altyazı/alternatif metin üretimi ve oyunlaştırılmış "Erişilebilirlik Skoru (0-100)" ile teşvik ederek platform genelinde engelsiz bir dijital alan oluşturulması hedeflenmektedir. 
 
-Projemiz, sunduğu yapay zekâ servisleri ile **Sosyal Yapay Zekâ** temasına; geliştirdiği engelsiz tasarım modelleri, gerçek zamanlı yönlendirme ekranları ve açıklanabilir önerileriyle de **Kullanıcı Katılımı & Arayüz/Kullanıcı Deneyimi (UI/UX)** temalarına doğrudan hitap etmektedir.
+Projemizin birincil odağı ve katıldığı ana dikey **Sosyal Yapay zeka** temasıdır. Geliştirilen görsel açıklama (VLM) ve otomatik altyazı (ASR) gibi yapay zeka servisleri projenin özünü oluştururken; engelsiz tasarım modelleri, gerçek zamanlı yönlendirme ekranları ve puanlama sistemi ise bu yapay zeka servislerinin kullanıcıya ulaştırılmasını sağlayan destekleyici **Kullanıcı Katılımı & Arayüz/Kullanıcı Deneyimi (UI/UX)** katmanını oluşturmaktadır.
+
 
 **1.2. Proje Kapsamı ve Yöntemi**
 Projenin sınırları (kapsamı) şu ana bileşenlerden oluşmaktadır:
@@ -30,12 +32,12 @@ Projenin sınırları (kapsamı) şu ana bileşenlerden oluşmaktadır:
 * **Otomatik Altyazı Modülü:** Videodaki konuşmaları otomatik ses tanıma (ASR - Whisper) desteğiyle Türkçe altyazıya dönüştürür. W3C standartları gereği WebVTT (.vtt) ve SRT formatlarını destekler.
 * **Metin Sadeleştirme Modülü:** Disleksi veya bilişsel engeli olan kullanıcılar için karmaşık metinleri anlam bütünlüğünü koruyarak sadeleştirir.
 * **Arayüz Kontrol Modülü:** WCAG 2.1 kurallarına göre renk kontrastı denetimi yapar; altyazılarda standart "opak siyah blok üstüne beyaz yazı" kontrast kuralını uygular ve kullanıcıya boyut/konum ayarlama olanağı sunar.
-* **Onay ve Puanlama Paneli:** İçerik üreticisinin kontrol yetkisini (user autonomy) koruyan, yapay zekâ önerilerini düzenlemesini sağlayan ve 100 puan üzerinden erişilebilirlik puanı hesaplayan bir oyunlaştırma (teşvik) paneli barındırır.
+* **Onay ve Puanlama Paneli:** İçerik üreticisinin kontrol yetkisini (user autonomy) koruyan, yapay zeka önerilerini düzenlemesini sağlayan ve 100 puan üzerinden erişilebilirlik puanı hesaplayan bir oyunlaştırma (teşvik) paneli barındırır.
 
 *Proje Sınırları Dışında Kalanlar:* Canlı yayınlar için eş zamanlı altyazı oluşturma, işaret dili avatar simülasyonu, konuşmacı ayrımı ve arka plan ses efekti algılama bu projenin kapsamı dışında tutulmuş olup gelecek geliştirmeler olarak planlanmıştır.
 
 **İzlenecek Yöntem:**
-Akademik ve teknik çalışmalar W3C Web İçeriği Erişilebilirlik Kılavuzları (WCAG 2.1) ve W3C WebVTT standartlarına dayandırılacaktır. Sistem, Python backend mimarisi (FastAPI) üzerinde kurulacak; konuşmayı metne dönüştürme (ASR) için Whisper modelleri ve görsel açıklama için Vision-Language modelleri (VLM) API/açık kaynak entegrasyonuyla çalıştırılacaktır. Proje, sadece fikir aşamasında kalmayıp; backend servislerinin bağlı olduğu, gönderi yükleme, otomatik altyazı/alternatif metin düzenleme ve 0-100 erişilebilirlik puanının dinamik olarak değiştiği çalışan bir web prototipi (MVP) ile desteklenecektir. Kaynak kodlar commit geçmişleriyle birlikte GitHub üzerinde saklanacak ve depo adresi raporlama sürecinde jüriyle paylaşılacaktır. Bu yöntem, gelecekte Türkçe dilinde cihaz üzerinde çalışan (on-device) daha hafif ve gizlilik odaklı yapay zekâ modellerinin eğitilmesine zemin hazırlayacaktır.
+Akademik ve teknik çalışmalar W3C Web İçeriği Erişilebilirlik Kılavuzları (WCAG 2.1) ve W3C WebVTT standartlarına dayandırılacaktır. Sistem, Python backend mimarisi (FastAPI) üzerinde kurulacak; konuşmayı metne dönüştürme (ASR) için Whisper modelleri ve görsel açıklama için Vision-Language modelleri (VLM) API/açık kaynak entegrasyonuyla çalıştırılacaktır. Proje, sadece fikir aşamasında kalmayıp; backend servislerinin bağlı olduğu, gönderi yükleme, otomatik altyazı/alternatif metin düzenleme ve 0-100 erişilebilirlik puanının dinamik olarak değiştiği çalışan bir web prototipi (MVP) ile desteklenecektir. Kaynak kodlar commit geçmişleriyle birlikte GitHub üzerinde saklanacak ve depo adresi raporlama sürecinde jüriyle paylaşılacaktır. Bu yöntem, gelecekte Türkçe dilinde cihaz üzerinde çalışan (on-device) daha hafif ve gizlilik odaklı yapay zeka modellerinin eğitilmesine zemin hazırlayacaktır.
 
 
 
@@ -48,24 +50,24 @@ Akademik ve teknik çalışmalar W3C Web İçeriği Erişilebilirlik Kılavuzlar
 Sosyal medya ekosistemindeki gerçek bir sorun nesnel bir şekilde tanımlanır. Problemin büyüklüğünü kanıtlayan resmi kaynaklar, istatistikler ve akademik veriler ile piyasadaki alternatif çözümler ele alınarak bu çözümlerin neden yetersiz kaldığı ortaya konur.
 **2.2. Çözüm Fikri, Özgünlük ve Yerlilik**
 
-Geliştirdiğimiz **NSosyal Erişilebilir Destek** projesi; sosyal medya paylaşımlarında erişilebilirliği isteğe bağlı bir eklenti olmaktan çıkarıp, içerik üretim sürecinin pürüzsüz ve doğal bir parçası haline getiren yapay zekâ destekli bütünleşik bir platform özelliğidir.
+Geliştirdiğimiz **NSosyal Erişilebilir Destek** projesi; sosyal medya paylaşımlarında erişilebilirliği isteğe bağlı bir eklenti olmaktan çıkarıp, içerik üretim sürecinin pürüzsüz ve doğal bir parçası haline getiren yapay zeka destekli bütünleşik bir platform özelliğidir.
 
 ### 2.2.1. Çözüm Fikri ve Güçlü Yönleri
-Sistemimiz, içerik üreticisi gönderisini (görsel, video, metin) hazırlayıp "Paylaş" butonuna basmadan hemen önce devreye girer. API Gateway ve FastAPI tabanlı Orkestrasyon Servisi üzerinden tetiklenen yapay zekâ modülleri (Gemini 3.6 Flash ve OpenAI Whisper), içeriği saniyeler içinde analiz eder. Görseller için otomatik alternatif metin (alt-text) üretilir, videolardaki konuşmalar zaman damgalı altyazılara dönüştürülür ve metinlerin WCAG standartlarına uygun renk kontrastı (siyah kutu üzerine beyaz yazı) denetlenir. 
+Sistemimiz, içerik üreticisi gönderisini (görsel, video, metin) hazırlayıp "Paylaş" butonuna basmadan hemen önce devreye girer. API Gateway ve FastAPI tabanlı Orkestrasyon Servisi üzerinden tetiklenen yapay zeka modülleri (Gemini 3.6 Flash ve OpenAI Whisper), içeriği saniyeler içinde analiz eder. Görseller için otomatik alternatif metin (alt-text) üretilir, videolardaki konuşmalar zaman damgalı altyazılara dönüştürülür ve metinlerin WCAG standartlarına uygun renk kontrastı (siyah kutu üzerine beyaz yazı) denetlenir. 
 
 **Çözümün En Güçlü Yönleri:**
-* **Bilişsel Yükü Sıfırlama:** İçerik üreticisi sıfırdan altyazı veya alt-text yazmakla uğraşmaz; yapay zekânın hazırladığı hazır önerileri tek tıkla onaylar veya saniyeler içinde düzenler.
+* **Bilişsel Yükü Sıfırlama:** İçerik üreticisi sıfırdan altyazı veya alt-text yazmakla uğraşmaz; yapay zekanın hazırladığı hazır önerileri tek tıkla onaylar veya saniyeler içinde düzenler.
 * **Kapsayıcı Tasarım:** Arayüzün kendisi de ekran okuyucu ve klavye navigasyonu uyumlu tasarlanarak engelsiz bir içerik üretme deneyimi sunar.
 
 ### 2.2.2. Projenin Özgün Yönü ve Yenilikçi Yaklaşımı
 Mevcut sosyal medya platformlarının sunduğu otomatik erişilebilirlik çözümlerine kıyasla projemiz dört yenilikçi yaklaşımla ayrışır:
 1. **Paylaşım Öncesi (Pre-publishing) Analiz:** Yaygın platformlar altyazıyı içerik paylaşıldıktan sonra (post-factum) üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine veya alternatif metinlerin hiç eklenememesine yol açar. Projemiz analizi **paylaşım öncesinde** yaparak hataların yayına girmesini donanımsal olarak engeller.
-2. **Hibrit Türkçe NLP / Doğrulama Katmanı (Bizim Yaklaşımımız):** Standart yapay zekâ modelleri (Whisper, Gemini vb.) Türkçe gibi eklemeli dillerde noktalama, kesme işaretleri ve hece tekrarlarında hatalar yapabilmektedir. Geliştirdiğimiz **Türkçe Post-Processing Katmanı**, ham yapay zekâ çıktılarını Türkçe morfolojik yapısına göre düzelterek W3C standardında WebVTT (.vtt) formatına çevirir.
+2. **Hibrit Türkçe NLP / Doğrulama Katmanı (Bizim Yaklaşımımız):** Standart yapay zeka modelleri (Whisper, Gemini vb.) Türkçe gibi eklemeli dillerde noktalama, kesme işaretleri ve hece tekrarlarında hatalar yapabilmektedir. Geliştirdiğimiz **Türkçe Post-Processing Katmanı**, ham yapay zeka çıktılarını Türkçe morfolojik yapısına göre düzelterek W3C standardında WebVTT (.vtt) formatına çevirir.
 3. **Oyunlaştırma (Erişilebilirlik Skoru 0-100):** İçerik üreticilerinin erişilebilir içerik üretme motivasyonunu artırmak amacıyla 100 puanlık bir teşvik motoru sunar. Puanı yükselen içeriklerin platform içi erişim (SEO/keşfet) oranları artırılarak katılım ödüllendirilir.
 
 ### 2.2.3. Yerlilik ve NSosyal Platform Uyumu
 * **Yerli ve Milli Ekosistem (NSosyal Entegrasyonu):** Geliştirilen bu sistem, ülkemizin yerli sosyal medya girişimi olan **NSosyal** platformunun altyapısına doğrudan entegre edilecek şekilde tasarlanmıştır. Bu sayede, yerli bir sosyal ağın dünyadaki en yüksek erişilebilirlik standartlarına (W3C/WCAG) sahip ilk platform olması sağlanacaktır.
-* **Türkçe Morfolojik Yapıya Özel Geliştirme:** Yapay zekâ çıktılarını denetleyen kural tabanlı doğrulama motorumuz, tamamen Türkçe dil yapısı, ünlü uyumları ve yazım kuralları gözetilerek yerli olarak kodlanmıştır.
+* **Türkçe Morfolojik Yapıya Özel Geliştirme:** Yapay zeka çıktılarını denetleyen kural tabanlı doğrulama motorumuz, tamamen Türkçe dil yapısı, ünlü uyumları ve yazım kuralları gözetilerek yerli olarak kodlanmıştır.
 * **Veri Egemenliği ve Yerel Sunucu (On-Premise) Desteği:** Sistemimiz bulut API'lerinin (Gemini) yanı sıra açık kaynaklı modellerin (**Whisper** ve **Florence-2**) yerel ulusal sunucularımızda (local deployment) çalışmasını destekler. Bu sayede kullanıcı verileri yurt dışındaki bulut servislerine gitmeden, tamamen yerli altyapıda güvenle işlenebilir.
 
 ### 2.2.4. Mevcut Alternatiflerle Piyasa Kıyaslaması
@@ -74,7 +76,7 @@ Mevcut sosyal medya platformlarının sunduğu otomatik erişilebilirlik çözü
 | :--- | :--- | :--- | :--- |
 | **Paylaşım Öncesi Kontrol** | **Var (Onay & Düzenleme Ekranı)** | Yok (Paylaşım sonrası üretilir) | Yok (Paylaşım sonrası üretilir) |
 | **W3C WebVTT Format Desteği**| **Tam Uyumlu (.vtt çıktı)** | Sadece dahili gösterim | SRT / TXT (WebVTT kısıtlı) |
-| **Türkçe NLP Doğrulama Katmanı**| **Var (Yazım ve imla düzeltme)** | Yok (Ham yapay zekâ hatası) | Yok (Yüksek hata oranı) |
+| **Türkçe NLP Doğrulama Katmanı**| **Var (Yazım ve imla düzeltme)** | Yok (Ham yapay zeka hatası) | Yok (Yüksek hata oranı) |
 | **Oyunlaştırma (0-100 Puan)** | **Var (Teşvik Mekanizması)** | Yok | Yok |
 | **Okunabilirlik Kontrast Ayarı**| **Var (Siyah kutu üzerine beyaz)**| Yok (Hareketli/renkli fontlar) | Kısmi (Kullanıcı ayarlı) |
 | **Yerel Sunucu (Local GPU) Desteği**| **Var (Veri gizliliği uyumlu)** | Yok (Tamamen bulut tabanlı) | Yok (Tamamen bulut tabanlı) |
@@ -92,7 +94,7 @@ Projemizin teknik altyapısı, modern mikroservis esintili monolitik bir mimariy
 * **Programlama Dili:** Python 3.14 (Yüksek performanslı veri işleme ve yapay zeka entegrasyonu için).
 * **Backend Web Çatısı:** FastAPI (Asenkron -async- yapısı sayesinde yüksek eşzamanlı istek işleme performansı ve otomatik interaktif Swagger/OpenAPI dokümantasyonu).
 * **ORM ve Veri Tabanı:** SQLAlchemy & SQLite (Geliştirme ve prototipleme aşamasında hafifliği için SQLite tercih edilmiş, ORM katmanı sayesinde tek bir satır değişikliğiyle PostgreSQL üretimine -production- geçebilecek şekilde tasarlanmıştır).
-* **Yapay Zekâ Entegrasyonu:** Google GenAI Python SDK (Gemini 3.6 Flash erişimi için) ve OpenAI Whisper (Konuşma transkripsiyonu için).
+* **Yapay zeka Entegrasyonu:** Google GenAI Python SDK (Gemini 3.6 Flash erişimi için) ve OpenAI Whisper (Konuşma transkripsiyonu için).
 * **Güvenlik:** JWT (JSON Web Token) tabanlı durumsuz (stateless) kimlik doğrulama katmanı.
 
 ### 3.1.2. Backend Dizin Yapısı (Modüler Mimarimiz)
@@ -106,7 +108,7 @@ backend/
 │   │   └── security.py     # Şifre şifreleme (bcrypt) ve token işlemleri
 │   ├── routers/            # API Yönlendirme Katmanı
 │   │   └── analyze.py      # Ana analiz uç noktası (/api/v1/analyze)
-│   ├── services/           # Yapay Zekâ ve İş Mantığı Servisleri
+│   ├── services/           # Yapay zeka ve İş Mantığı Servisleri
 │   │   ├── orchestration.py# İş akışını yöneten orkestrasyon motoru
 │   │   ├── alt_text_service.py # Gemini 3.6 Flash alt-text üretici
 │   │   ├── subtitle_service.py # Whisper tabanlı altyazı motoru
@@ -131,7 +133,7 @@ Proje kod tabanının versiyon yönetimi ve ekip içi iş birliği süreçleri a
 
 **3.2. Model ve Veri Doğrulama**
 
-Projemizde yer alan yapay zekâ ve veri analitiği süreçleri, yüksek doğruluk ve erişilebilirlik standartlarını sağlamak amacıyla iki ana modülde (Otomatik Altyazı ve Görsel Açıklama) yapılandırılmıştır.
+Projemizde yer alan yapay zeka ve veri analitiği süreçleri, yüksek doğruluk ve erişilebilirlik standartlarını sağlamak amacıyla iki ana modülde (Otomatik Altyazı ve Görsel Açıklama) yapılandırılmıştır.
 
 ### 3.2.1. Veri Ön İşleme (Preprocessing)
 1. **Ses Ön İşleme (Audio Pipeline):** Kullanıcının yüklediği videodan (**FFmpeg** aracı ile) ses kanalı `.wav` (16kHz, mono) formatında ayrıştırılır. Gürültü filtreleme ve ses normalizasyonu uygulanarak ses tanıma (ASR) modelinin doğruluğunu azaltacak arka plan gürültüleri elenir.
@@ -143,10 +145,10 @@ Sistemimizin ses tanıma omurgasını oluşturmak amacıyla literatürdeki ve en
 
 | Bileşen / Model / Yöntem | Sistemdeki Rolü (Görevi) | Güçlü Yönleri (Avantajları) | Zayıf Yönleri / Sınırları | Projedeki Kullanım Yeri ve Amacı |
 | :--- | :--- | :--- | :--- | :--- |
-| **FFmpeg** | Medya İşleme & Montaj Katmanı | • Çok hızlı ses ayrıştırma (video -> .wav).<br/>• Altyazıyı videoya piksellerle çizme (hardsub) veya dosya olarak gömme (softsub).<br/>• Ses normalizasyonu ve gürültü filtreleme. | • Yapay zekâ değildir.<br/>• Sesi anlayamaz, konuşmaları metne dökemez. | Pipeline'ın başında videodan temiz ses üretmek; pipeline'ın sonunda altyazılı nihai videoyu render etmek. |
+| **FFmpeg** | Medya İşleme & Montaj Katmanı | • Çok hızlı ses ayrıştırma (video -> .wav).<br/>• Altyazıyı videoya piksellerle çizme (hardsub) veya dosya olarak gömme (softsub).<br/>• Ses normalizasyonu ve gürültü filtreleme. | • Yapay zeka değildir.<br/>• Sesi anlayamaz, konuşmaları metne dökemez. | Pipeline'ın başında videodan temiz ses üretmek; pipeline'ın sonunda altyazılı nihai videoyu render etmek. |
 | **Whisper (Base / Small)** | Hafif ASR Motoru | • Çok düşük donanım kaynağı (RAM/GPU) gereksinimi.<br/>• Düşük gecikme süresi (Hızlı transkripsiyon). | • Türkçe gibi eklemeli dillerde kelime hata oranı (WER) yüksektir.<br/>• Noktalama ve eklerde hata yapabilir. | Düşük donanımlı cihazlarda veya önizleme ekranlarında hızlı taslak altyazı çıkarmak için kullanılır. |
 | **Whisper (Large-v3 / Turbo)** | Gelişmiş ASR Çekirdeği | • Türkçe konuşmaları anlama ve zaman damgası (timestamp) doğruluğu çok yüksektir.<br/>• Arka plan gürültüsüne ve aksanlara dayanıklıdır. | • Yüksek GPU kaynağı gerektirir.<br/>• Saf haliyle argo, özel isim ve tam dil bilgisi kurallarında bazen düzeltme ister. | Sistemin omurgasını oluşturan ana Türkçe konuşma tanıma motoru. |
-| **Whisper + Türkçe NLP / Kural Katmanı (Bizim Yaklaşımımız)** | Hibrit Altyazı & Doğrulama Katmanı | • Ham metindeki Türkçe ek, imla ve noktalama hatalarını düzeltir.<br/>• W3C/WCAG standartlarına tam uyumlu WebVTT formatı üretir. | • Sisteme ek bir işlem adımı (1-2 saniye gecikme) ekler. | **Projenin Özgün Değeri:** Yapay zekânın ürettiği altyazıyı erişilebilirlik standartlarına uygun hale getiren düzeltme ve formatlama katmanı. |
+| **Whisper + Türkçe NLP / Kural Katmanı (Bizim Yaklaşımımız)** | Hibrit Altyazı & Doğrulama Katmanı | • Ham metindeki Türkçe ek, imla ve noktalama hatalarını düzeltir.<br/>• W3C/WCAG standartlarına tam uyumlu WebVTT formatı üretir. | • Sisteme ek bir işlem adımı (1-2 saniye gecikme) ekler. | **Projenin Özgün Değeri:** Yapay zekanın ürettiği altyazıyı erişilebilirlik standartlarına uygun hale getiren düzeltme ve formatlama katmanı. |
 | **Wav2Vec2 (Türkçe Fine-Tuned)** | Alternatif Türkçe ASR | • Sadece yerel Türkçe veri setleriyle eğitildiği için yerli konuşma kalıplarında başarılıdır. | • Çok dilli ve gürültülü ortamlarda Whisper kadar esnek değildir.<br/>• Müzik/efekt içeren videolarda başarımı düşer. | Proje raporunda Whisper'ın neden tercih edildiğini savunmak için kıyaslama/alternatif model olarak kullanılır. |
 
 #### Altyazı Modülü Veri Akış Aşamaları (ASR Pipeline):
@@ -190,7 +192,7 @@ Görseller için ekran okuyucu standartlarına uygun alternatif açıklamalar ü
 
 ### 3.2.4. Prototip (PoC) Doğrulama Testi ve Örnek Çıktı
 
-Geliştirilen backend iskeleti ve yapay zekâ entegrasyonu, resmi **TEKNOFEST 2026 Şanlıurfa Tanıtım Afişi** üzerinden test edilmiş ve doğrulanmıştır. 
+Geliştirilen backend iskeleti ve yapay zeka entegrasyonu, resmi **TEKNOFEST 2026 Şanlıurfa Tanıtım Afişi** üzerinden test edilmiş ve doğrulanmıştır. 
 
 * **Test Parametreleri:**
   - **Girdi Görseli:** `teknofest_test.jpg` (Göbeklitepe temalı resmi afiş)
@@ -198,7 +200,7 @@ Geliştirilen backend iskeleti ve yapay zekâ entegrasyonu, resmi **TEKNOFEST 20
   - **Çözüm Süresi (Latency):** 1.84 saniye
   - **Uygulanan Prompt:** W3C Standartlarına Uygun Betimleme Direktifi
 
-* **Yapay Zekâ Tarafından Üretilen Türkçe Alternatif Metin (Alt-Text):**
+* **Yapay zeka Tarafından Üretilen Türkçe Alternatif Metin (Alt-Text):**
   > *"Göbeklitepe benzeri antik kalıntılar arasına yerleştirilmiş taş roket, robotik figürler ve gezgin araçlarının tasvir edildiği afişin üst kısmında 'TEKNOFEST '26 ŞANLIURFA, 30 EYLÜL - 4 EKİM' yazısı yer alıyor. Alt köşelerde ise TEKNOFEST, T.C. Sanayi ve Teknoloji Bakanlığı ile Türkiye Teknoloji Takımı logoları ve '#MilliTeknolojiHamlesi' etiketi bulunuyor."*
 
 * **Değerlendirme ve Başarı Analizi:**
@@ -238,7 +240,7 @@ flowchart TD
     CheckAcc["🔍 Erişilebilirlik Kontrolü Başlat"]:::step
     Decision{"❓ Erişilebilirlik Sorunları<br/>Var mı?"}:::decision
     ShowIssues["⚠️ Erişilebilirlik Sorunlarını Göster<br/>(Alternatif Metin, Altyazı, Kontrast Hataları)"]:::step
-    EditContent["🛠️ Düzenle / Düzelt<br/>(Yapay Zekâ Önerilerini Onayla veya Düzenle)"]:::step
+    EditContent["🛠️ Düzenle / Düzelt<br/>(Yapay zeka Önerilerini Onayla veya Düzenle)"]:::step
     Recheck["🔄 Tekrar Kontrol Et"]:::step
     ContentOk["✅ İçerik Uygun"]:::endstep
     Publish["🚀 Paylaş / Yayınla"]:::endstep
@@ -257,19 +259,19 @@ flowchart TD
 ```
 
 ### 3.3.2. Arayüz Tasarım Kararları ve Gerekçeleri (UI Rationale)
-1. **Tek Panel Üzerinden Yönetim (Inline Editing):** Kullanıcının farklı ekranlar veya pencereler arasında geçiş yaparken odak kaybı yaşamaması ve zaman kaybetmemesi amacıyla tüm yapay zekâ altyazı ve alt-text önerileri tek bir "Erişilebilirlik Onay ve Düzeltme Paneli" üzerinde listelenir.
-2. **Kullanıcı Denetimi ve Otonomisi:** Yapay zekânın olası hatalı betimleme (halüsinasyon) veya altyazı yazım hatalarından doğabilecek itibar risklerini önlemek adına, sistem gönderiyi otomatik paylaşmaz. Son onay yetkisi ve düzenleme hakkı her zaman içerik üreticisindedir.
+1. **Tek Panel Üzerinden Yönetim (Inline Editing):** Kullanıcının farklı ekranlar veya pencereler arasında geçiş yaparken odak kaybı yaşamaması ve zaman kaybetmemesi amacıyla tüm yapay zeka altyazı ve alt-text önerileri tek bir "Erişilebilirlik Onay ve Düzeltme Paneli" üzerinde listelenir.
+2. **Kullanıcı Denetimi ve Otonomisi:** Yapay zekanın olası hatalı betimleme (halüsinasyon) veya altyazı yazım hatalarından doğabilecek itibar risklerini önlemek adına, sistem gönderiyi otomatik paylaşmaz. Son onay yetkisi ve düzenleme hakkı her zaman içerik üreticisindedir.
 3. **Puanlama ile Teşvik (Oyunlaştırma):** Kullanıcının gönderisini paylaşmadan önce eksiklerini gidermesi için dinamik olarak güncellenen **0-100 Erişilebilirlik Skoru** paneli eklenmiştir. Gönderideki eksikler giderildikçe bu puan gerçek zamanlı olarak yükselir ve kullanıcıyı motive eder.
 
 ### 3.3.3. Erişilebilirlik Yaklaşımı (W3C/WCAG Standartları)
 * **Kapsayıcı Kontrast (Siyah-Beyaz Uyumu):** WCAG 2.1 standartlarına uygun olarak en yüksek kontrastı (en az 4.5:1 kontrast oranı) sağlamak amacıyla altyazılar için varsayılan olarak **"opak siyah kutu üzerine beyaz yazı"** standardı uygulanmıştır.
-* **Klavye Navigasyonu:** Fare kullanamayan fiziksel engelli içerik üreticileri için tüm gönderi oluşturma ve yapay zekâ öneri onaylama akışı sadece `Tab` ve `Enter` tuşlarıyla yönetilebilecek şekilde kodlanmıştır.
+* **Klavye Navigasyonu:** Fare kullanamayan fiziksel engelli içerik üreticileri için tüm gönderi oluşturma ve yapay zeka öneri onaylama akışı sadece `Tab` ve `Enter` tuşlarıyla yönetilebilecek şekilde kodlanmıştır.
 * **Ekran Okuyucu Dostu Arayüz:** Arayüz bileşenlerinin tamamı HTML5 semantik etiketleri ve yerleşik ARIA nitelikleri (`aria-label`, `aria-live` vb.) ile kodlanarak ekran okuyucu yazılımlarla (NVDA, JAWS, VoiceOver) tam uyumlu hale getirilmiştir.
 
 ### 3.3.4. Kullanılabilirlik Testi Sonuçları
 * **Metot:** 5 içerik üreticisi ve 3 engelli kullanıcı katılımıyla "Bilişsel Yürüyüş" (Cognitive Walkthrough) kullanılabilirlik testi gerçekleştirilmiştir.
 * **Ana Bulgular:** 
-  - İçerik üreticilerinin yapay zekâ tarafından hazırlanan altyazı ve alt-text önerilerini inceleyip onaylama süresi gönderi başına ortalama **12.4 saniye** olarak ölçülmüştür (İş yükü minimuma indirilmiştir).
+  - İçerik üreticilerinin yapay zeka tarafından hazırlanan altyazı ve alt-text önerilerini inceleyip onaylama süresi gönderi başına ortalama **12.4 saniye** olarak ölçülmüştür (İş yükü minimuma indirilmiştir).
   - 100 puanlık oyunlaştırma sisteminin entegre edilmesiyle birlikte, kullanıcıların altyazı ve alt-text ekleme motivasyonunun **%85 oranında arttığı** saptanmıştır.
   - Altyazı yazı boyutunun ve konumunun ayarlanabilir olması, az gören yaşlı kullanıcıların kullanılabilirlik puanlarını anlamlı ölçüde yükseltmiştir.
 
