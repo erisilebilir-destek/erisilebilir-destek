@@ -204,7 +204,13 @@ flowchart TD
     linkStyle default stroke:#64748b,stroke-width:1.5px;
 ```
 
+### 3.2.2.1. Otomatik Altyazı Üretim Çalışma Ekranı
+Aşağıdaki görselde, video işleme ve otomatik ses tanıma (ASR) hattımızın başarıyla çalışarak Türkçe altyazıları çıkardığı ve zaman damgalı WebVTT formatında biçimlendirdiği test ekranı yer almaktadır:
+
+![Yapay Zeka ile Otomatik Altyazı Üretim Ekranı](./images/altyazi_uretim_test.png)
+
 ### 3.2.3. Görsel Alternatif Metin (VLM) Model Karşılaştırması
+
 
 Görseller için ekran okuyucu standartlarına uygun alternatif açıklamalar üretmek amacıyla Vision-Language Modelleri karşılaştırılmış ve projedeki kullanım hedefleri belirlenmiştir:
 
@@ -225,7 +231,12 @@ Geliştirilen backend iskeleti ve Yapay Zeka entegrasyonu, resmi **TEKNOFEST 202
 * **Yapay Zeka Tarafından Üretilen Türkçe Alternatif Metin (Alt-Text):**
   > *"Göbeklitepe benzeri antik kalıntılar arasına yerleştirilmiş taş roket, robotik figürler ve gezgin araçlarının tasvir edildiği afişin üst kısmında 'TEKNOFEST '26 ŞANLIURFA, 30 EYLÜL - 4 EKİM' yazısı yer alıyor. Alt köşelerde ise TEKNOFEST, T.C. Sanayi ve Teknoloji Bakanlığı ile Türkiye Teknoloji Takımı logoları ve '#MilliTeknolojiHamlesi' etiketi bulunuyor."*
 
+Aşağıdaki görselde, afiş analizi sonucunda görsel betimleme servisimizin ürettiği Türkçe alternatif metin çıktısının test anı gösterilmektedir:
+
+![Yapay Zeka ile Otomatik Alternatif Metin Üretim Ekranı](./images/alt_metin_uretim_test.png)
+
 * **Değerlendirme ve Başarı Analizi:**
+
   - **W3C Erişilebilirlik Uyumu:** Çıktıda ekran okuyucuları yoracak gereksiz kelimeler (örn: *"Bu resimde..."*, *"Fotoğrafta..."*) elenmiştir.
   - **OCR Doğruluğu:** Görseldeki tüm yazılı metinler, tarihler ve kurum logoları %100 doğrulukla okunmuş ve alternatife dahil edilmiştir.
   - **Bağlamsal Betimleme:** Antik yapı ile robotik nesnelerin ilişkisi jüri standartlarına uygun şekilde nesnel olarak cümlelere dökülmüştür.
@@ -296,6 +307,12 @@ flowchart TD
   - İçerik üreticilerinin Yapay Zeka tarafından hazırlanan altyazı ve alt-text önerilerini inceleyip onaylama süresi gönderi başına ortalama **12.4 saniye** olarak ölçülmüştür (İş yükü minimuma indirilmiştir).
   - 100 puanlık oyunlaştırma sisteminin entegre edilmesiyle birlikte, kullanıcıların altyazı ve alt-text ekleme motivasyonunun **%85 oranında arttığı** saptanmıştır.
   - Altyazı yazı boyutunun ve konumunun ayarlanabilir olması, az gören yaşlı kullanıcıların kullanılabilirlik puanlarını anlamlı ölçüde yükseltmiştir.
+
+### 3.3.5. Tasarım ve Prototip Arayüz Ekranları (Figma & Frontend)
+Aşağıdaki görselde, Figma üzerinde hazırlanan kullanıcı deneyimi tasarımları ile kodlanan mobil uyumlu web arayüzünün (gönderi akışı, profil ekranı, engelsiz yaşam puanı ve paylaşım arayüzü) bir arada sunumu yer almaktadır:
+
+![Figma Tasarımları ve Çalışan Frontend Arayüzü](./images/ui_ux_frontend_mockup.png)
+
 
 
 
