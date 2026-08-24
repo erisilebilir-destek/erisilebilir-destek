@@ -1,4 +1,4 @@
-﻿****
+****
 
 
 # İÇİNDEKİLER(Raporun tüm ana başlıkları ve sayfa numaraları eksiksiz olarak listelenecektir.)
@@ -37,7 +37,8 @@ Projenin sınırları (kapsamı) şu ana bileşenlerden oluşmaktadır:
 *Proje Sınırları Dışında Kalanlar:* Canlı yayınlar için eş zamanlı altyazı oluşturma, işaret dili avatar simülasyonu, konuşmacı ayrımı ve arka plan ses efekti algılama bu projenin kapsamı dışında tutulmuş olup gelecek geliştirmeler olarak planlanmıştır.
 
 **İzlenecek Yöntem:**
-Akademik ve teknik çalışmalar W3C Web İçeriği Erişilebilirlik Kılavuzları (WCAG 2.1) ve W3C WebVTT standartlarına dayandırılacaktır. Sistem, Python backend mimarisi (FastAPI) üzerinde kurulacak; konuşmayı metne dönüştürme (ASR) için Whisper modelleri ve görsel açıklama için Vision-Language modelleri (VLM) API/açık kaynak entegrasyonuyla çalıştırılacaktır. Proje, sadece fikir aşamasında kalmayıp; backend servislerinin bağlı olduğu, gönderi yükleme, otomatik altyazı/alternatif metin düzenleme ve 0-100 erişilebilirlik puanının dinamik olarak değiştiği çalışan bir web prototipi (MVP) ile desteklenecektir. Kaynak kodlar commit geçmişleriyle birlikte GitHub üzerinde saklanacak ve depo adresi raporlama sürecinde jüriyle paylaşılacaktır. Bu yöntem, gelecekte Türkçe dilinde cihaz üzerinde çalışan (on-device) daha hafif ve gizlilik odaklı Yapay Zeka modellerinin eğitilmesine zemin hazırlayacaktır.
+Akademik ve teknik çalışmalar W3C Web İçeriği Erişilebilirlik Kılavuzları (WCAG 2.1) ve W3C WebVTT standartlarına dayandırılacaktır. Sistem, Python backend mimarisi (FastAPI) üzerinde kurulacak; konuşmayı metne dönüştürme (ASR) için Whisper modelleri ve görsel açıklama için Vision-Language modelleri (VLM) API/açık kaynak entegrasyonuyla çalıştırılacaktır. Proje, sadece fikir aşamasında kalmayıp; backend servislerinin bağlı olduğu, gönderi yükleme, otomatik altyazı/alternatif metin düzenleme ve 0-100 erişilebilirlik puanının dinamik olarak değiştiği çalışan bir web prototipi (MVP) ile desteklenecektir. Kaynak kodlar commit geçmişleriyle birlikte GitHub üzerinde saklanacak ve depo adresi ([https://github.com/erisilebilir-destek/erisilebilir-destek](https://github.com/erisilebilir-destek/erisilebilir-destek)) raporlama sürecinde jüriyle paylaşılacaktır. Bu yöntem, gelecekte Türkçe dilinde cihaz üzerinde çalışan (on-device) daha hafif ve gizlilik odaklı Yapay Zeka modellerinin eğitilmesine zemin hazırlayacaktır.
+
 
 
 
