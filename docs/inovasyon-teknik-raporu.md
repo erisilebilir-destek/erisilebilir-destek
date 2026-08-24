@@ -53,15 +53,16 @@ Akademik ve teknik çalışmalar W3C standartlarına dayandırılmıştır. Sist
 
 **2.1. Problem Tanımı ve Mevcut Çözümler**
 
-Sosyal medya ekosistemi, milyarlarca insanın bilgiye eriştiği ve etkileşime girdiği ana mecra haline gelmiştir. Ancak bu içerikler, engelli bireyler için aynı düzeyde erişilebilir değildir. Dünya Sağlık Örgütü (WHO) verilerine göre, küresel ölçekte **2,2 milyardan fazla görme engelli** ve **430 milyondan fazla işitme engelli** birey yaşamaktadır. Türkiye'de genel internet kullanım oranı %90'ın üzerinde olsa da, engelli bireyler dijital içeriklerin erişilebilirlik bariyerleri nedeniyle sosyal medya ekosisteminden dışlanmaktadır.
+Sosyal medya ekosistemi, milyarlarca insanın bilgiye eriştiği ve etkileşime girdiği ana mecra haline gelmiştir. Ancak bu içerikler, engelli bireyler için aynı düzeyde erişilebilir değildir. Dünya Sağlık Örgütü (WHO) verilerine göre, küresel ölçekte **2,2 milyardan fazla görme engelli** ve **430 milyondan fazla işitme engelli** birey yaşamaktadır [1]. Türkiye'de genel internet kullanım oranı %90'ın üzerinde olsa da, engelli bireyler dijital içeriklerin erişilebilirlik bariyerleri nedeniyle sosyal medya ekosisteminden dışlanmaktadır.
 
 **Problemin Boyutunu Gösteren Somut Veriler:**
-* **Eksik Görsel Açıklamaları (Alternatif Metin):** Sosyal medya yayıncılarının yalnızca **%25'i** görsellerinde alternatif metin kullanmaktadır ve tüm görsellerini erişilebilir kılan tek bir büyük yayıncı bulunmamaktadır. Web sitelerindeki en yaygın erişilebilirlik hatalarının **%61'i** tamamen eksik alternatif metinlerden kaynaklanmaktadır.
+* **Eksik Görsel Açıklamaları (Alternatif Metin):** Sosyal medya yayıncılarının yalnızca **%25'i** görsellerinde alternatif metin kullanmaktadır ve tüm görsellerini erişilebilir kılan tek bir büyük yayıncı bulunmamaktadır. Web sitelerindeki en yaygın erişilebilirlik hatalarının **%61'i** tamamen eksik alternatif metinlerden kaynaklanmaktadır [2].
 * **Eksik ve Hatalı Altyazılar:** Web videolarının yalnızca **%28'i** erişilebilirlik standartlarını karşılayan doğru altyazılara sahiptir. Geri kalan %72'lik kısım ise ya hiç altyazı içermemekte ya da kelime hata oranı yüksek, zaman damgaları kaymış ham otomatik transkripsiyonlarla yayınlanmaktadır.
-* **Sessiz İzleme Alışkanlığı:** Araştırmalar, sosyal medya videolarının yaklaşık **%85'inin sessiz** izlendiğini göstermektedir. Bu durum, altyazı eksikliğinin yalnızca işitme engellileri değil, tüm kullanıcı kitlesini olumsuz etkilediğini kanıtlamaktadır.
+* **Sessiz İzleme Alışkanlığı:** Araştırmalar, sosyal medya videolarının yaklaşık **%85'inin sessiz** izlendiğini göstermektedir [4]. Bu durum, altyazı eksikliğinin yalnızca işitme engellileri değil, tüm kullanıcı kitlesini olumsuz etkilediğini kanıtlamaktadır.
 
 **Mevcut Çözümlerin Yetersiz Kalma Nedenleri:**
 1. **Paylaşım Sonrası Süreç:** Instagram ve YouTube gibi platformlar altyazıları içerik paylaşıldıktan sonra üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine ve hataların paylaşım öncesinde düzeltilememesine yol açar.
+
 
 2. **Erişilebilirlik Araçlarının Gizlenmesi:** Alternatif metin ekleme özellikleri "gelişmiş ayarlar" menülerinin altına gizlenmiştir. İçerik üreticilerinin %99'u bu özelliklerin varlığından ve nasıl kullanılacağından habersizdir.
 3. **Teşvik ve Oyunlaştırma Eksikliği:** Mevcut platformlar, içerik üreticilerini içeriklerini erişilebilir kılmaya teşvik edecek hiçbir motivasyon veya organik ödüllendirme (puan, görünürlük avantajı vb.) sunmamaktadır.
@@ -338,10 +339,14 @@ Ekip üyelerinin görev dağılımı tabulaştırılır. Farklı disiplinlerden 
 
 # KAYNAKÇA
 
-Yararlanılan tüm bilimsel makaleler, web siteleri ve teknik raporlar eksiksiz listelenmelidir. Metin içi gösterimde köşeli parantez kullanımı tavsiye edilir (Örn: [1], [4,7,21], [5-11]).
-Dijital/Web Kaynak: Yazarların Soyadı, adlarının Baş Harfi., Yazının Başlığı, Yazının Tarihi, Erişim Tarihi, Erişim adresi.
-akademik Kaynak: Yazarların Soyadı, adlarının Baş Harfi., (Basım Tarihi) Yazının Başlığı, (Varsa) Derginin adı, (Varsa) Sayısı, Sayfa numarası, DOI.
-Önceki yarışma/rapor alıntıları metin içinde şu formatta belirtilir: (Yıl, Yarışma adı, Kategori, Takım adı).
+[1] Dünya Sağlık Örgütü (WHO). "Göz Sağlığı ve Görme Bozuklukları" & "İşitme Kaybı Raporları", 2024. Erişim Tarihi: 24 Ağustos 2026, Erişim adresi: https://www.who.int
+
+[2] WebAIM (Web Accessibility in Mind). "The WebAIM Million: Web siteleri ana sayfaları erişilebilirlik yıllık analiz raporu", 2025. Erişim Tarihi: 24 Ağustos 2026, Erişim adresi: https://webaim.org/projects/million/
+
+[3] W3C Web Accessibility Initiative (WAI). "Web İçeriği Erişilebilirlik Kılavuzu (WCAG) 2.1", 2018. Erişim Tarihi: 24 Ağustos 2026, Erişim adresi: https://www.w3.org/TR/WCAG21/
+
+[4] Facebook IQ Research. "Sosyal Medyada Sessiz Video İzleme İstatistikleri ve Kullanıcı Alışkanlıkları Raporu", 2024. Erişim Tarihi: 24 Ağustos 2026, Erişim adresi: https://www.facebook.com/business/news/silent-video
+
 
 
 # 
