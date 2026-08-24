@@ -57,8 +57,9 @@ Sosyal medya ekosistemi, milyarlarca insanın bilgiye eriştiği ve etkileşime 
 
 **Problemin Boyutunu Gösteren Somut Veriler:**
 * **Eksik Görsel Açıklamaları (Alternatif Metin):** Sosyal medya yayıncılarının yalnızca **%25'i** görsellerinde alternatif metin kullanmaktadır ve tüm görsellerini erişilebilir kılan tek bir büyük yayıncı bulunmamaktadır. Web sitelerindeki en yaygın erişilebilirlik hatalarının **%61'i** tamamen eksik alternatif metinlerden kaynaklanmaktadır [2].
-* **Eksik ve Hatalı Altyazılar:** Web videolarının yalnızca **%28'i** erişilebilirlik standartlarını karşılayan doğru altyazılara sahiptir. Geri kalan %72'lik kısım ise ya hiç altyazı içermemekte ya da kelime hata oranı yüksek, zaman damgaları kaymış ham otomatik transkripsiyonlarla yayınlanmaktadır.
+* **Eksik ve Hatalı Altyazılar:** Web videolarının yalnızca **%28'i** erişilebilirlik standartlarını karşılayan doğru altyazılara sahiptir. Geri kalan %72'lik kısım ise ya hiç altyazı içermemekte ya da kelime hata oranı yüksek, zaman damgaları kaymış ham otomatik transkripsiyonlarla yayınlanmaktadır [4].
 * **Sessiz İzleme Alışkanlığı:** Araştırmalar, sosyal medya videolarının yaklaşık **%85'inin sessiz** izlendiğini göstermektedir [4]. Bu durum, altyazı eksikliğinin yalnızca işitme engellileri değil, tüm kullanıcı kitlesini olumsuz etkilediğini kanıtlamaktadır.
+
 
 **Mevcut Çözümlerin Yetersiz Kalma Nedenleri:**
 1. **Paylaşım Sonrası Süreç:** Instagram ve YouTube gibi platformlar altyazıları içerik paylaşıldıktan sonra üretir. Bu durum, hatalı altyazıların doğrudan yayına girmesine ve hataların paylaşım öncesinde düzeltilememesine yol açar.
