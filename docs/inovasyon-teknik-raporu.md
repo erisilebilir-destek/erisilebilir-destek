@@ -37,7 +37,8 @@ Projenin sınırları (kapsamı) şu ana bileşenlerden oluşmaktadır:
 *Proje Sınırları Dışında Kalanlar:* Canlı yayınlar için eş zamanlı altyazı oluşturma, işaret dili avatar simülasyonu, konuşmacı ayrımı ve arka plan ses efekti algılama bu projenin kapsamı dışında tutulmuş olup gelecek geliştirmeler olarak planlanmıştır.
 
 **İzlenecek Yöntem:**
-Akademik ve teknik çalışmalar W3C (WCAG 2.1 ve WebVTT) standartlarına dayandırılacaktır. Sistem, Python (FastAPI) backend üzerinde Whisper (ASR) ve Vision-Language (VLM) modellerinin entegrasyonuyla geliştirilecektir. Proje, gönderi yükleme, altyazı/alt-text düzenleme ve erişilebilirlik puanının dinamik değiştiği çalışan bir web prototipiyle (MVP) doğrulanacaktır. Kaynak kodlar ve commit geçmişi [GitHub deposunda](https://github.com/erisilebilir-destek/erisilebilir-destek) paylaşılmıştır. Bu altyapı, gelecekte cihaz üzerinde çalışan (on-device) yerel Yapay Zeka modellerinin eğitilmesine zemin hazırlayacaktır.
+Akademik ve teknik çalışmalar W3C (WCAG 2.1 ve WebVTT) standartlarına dayandırılmıştır. Sistem, Python (FastAPI) backend üzerinde Whisper (ASR) ve Vision-Language (VLM) modellerinin entegrasyonuyla geliştirilmiştir. Proje; gönderi yükleme, altyazı/alt-text düzenleme ve erişilebilirlik puanının dinamik değiştiği çalışan bir web prototipiyle (MVP) doğrulanmış ve çalışır hale getirilmiştir. Kaynak kodlar ve commit geçmişi [GitHub deposunda](https://github.com/erisilebilir-destek/erisilebilir-destek) paylaşılmıştır. Bu altyapı, gelecekte cihaz üzerinde çalışan (on-device) yerel Yapay Zeka modellerinin eğitilmesine zemin hazırlamaktadır.
+
 
 
 
